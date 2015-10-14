@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Ubuntu 配置
 category: 技术
 tags: 
