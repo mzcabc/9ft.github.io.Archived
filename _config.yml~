@@ -1,0 +1,33 @@
+permalink: /:year/:month/:day/:title.md
+markdown: kramdown
+pygments: true
+
+kramdown:
+  input: GFM
+
+# 作者信息
+author: 
+  name: 9ft
+  email: mindycong@gmail.com
+  link: http://b.mindy.tk
+  weibo: http://weibo.com/
+  github: http://github.com/9ft
+
+# 站点信息
+title: 9ft 
+description: 
+url: http://b.mindy.tk
+rss_url: /pages/atom.xml
+
+# avatar头像及Favicon
+avatar: http://7u2ho6.com1.z0.glb.clouddn.com/site-avatar.png
+favicon: http://7u2ho6.com1.z0.glb.clouddn.com/site-favicon.ico
+
+# google analytics 设置
+ga:
+  id: 
+  url: b.mindy.tk
+
+# disqus 设置
+disqus:
+  shortname: 9ft
