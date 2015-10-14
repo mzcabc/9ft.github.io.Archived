@@ -1,39 +1,33 @@
-# Site settings
-title: Note
-email: mindycong@gmail.com
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://b.mindy.tk" # the base hostname & protocol for your site
-
-
-# Sidebar filter
-# Choose 'tag' or 'category' as filter in sidebar.
-filter: 'tag'
-
-
-# Social account
-twitter:  9ft3
-# weibo:    ID
-github:   9ft
-# codepen:  username
-# dribbble: username
-
-
-# Comment
-# disqus_shortname: discussion_shortname
-
-
-# Google Analytics
-# google_analytics: tracking_ID
-
-
-# Build settings
+permalink: /:year/:month/:day/:title.html
 markdown: kramdown
-sass:
-  style: compressed
-gems:
-  - jekyll-sitemap
+pygments: true
 
+kramdown:
+  input: GFM
+
+# 作者信息
+author: 
+  name: 9ft
+  email: mindycong@gmail.com
+  link: http://b.mindy.tk
+  weibo: http://weibo.com/
+  github: http://github.com/9ft
+
+# 站点信息
+title: 9ft 
+description: 
+url: http://b.mindy.tk
+rss_url: /pages/atom.xml
+
+# avatar头像及Favicon
+avatar: http://7u2ho6.com1.z0.glb.clouddn.com/site-avatar.png
+favicon: http://7u2ho6.com1.z0.glb.clouddn.com/site-favicon.ico
+
+# google analytics 设置
+ga:
+  id: 
+  url: b.mindy.tk
+
+# disqus 设置
+disqus:
+  shortname: 9ft
