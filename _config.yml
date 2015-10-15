@@ -26,7 +26,7 @@ favicon: http://7u2ho6.com1.z0.glb.clouddn.com/site-favicon.ico
 # google analytics 设置
 ga:
   id: UA-46567212-3
-  url: b.mindy.tk
+  url: auto
 
 # disqus 设置
 disqus:
