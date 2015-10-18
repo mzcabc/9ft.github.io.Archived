@@ -1,6 +1,6 @@
 ---
 layout: post
-title: sublime 配置
+title: Windows下使用Git的配置
 category: 技术
 tags:
 keywords:
