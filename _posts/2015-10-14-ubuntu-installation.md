@@ -2,15 +2,15 @@
 layout: post
 title: Ubuntu 配置
 category: 技术
-tags: 
-keywords: 
-description: 
+tags:
+keywords:
+description:
 ---
 
 虽然Linux不太会用，可是比较喜欢装系统。本文记录Ubuntu下自己用的配置和软件包，方便装系统后快速折腾。
 
-##虚拟机下安装
-###open-vm-tools
+## 虚拟机下安装
+### open-vm-tools
 在装VMware Tools时，官方推荐用`open-vm-tools`了，听官方的。
 ```
 apt-get install open-vm-tools
@@ -26,7 +26,16 @@ ii  open-vm-tools-desktop   2:9.4.0-1280544-5ubuntu6.2  amd64   Open VMware Tool
 ii  open-vm-tools-lts-trusty    2:9.4.0-1280544-5ubuntu6.2  all Open VMware Tools for virtual machines hosted on VMware (transitional package)
 ```
 
-#个人目录下文件夹名称改为英文
+# 显示语言
+## 终端界面改为中文
+在`/etc/environment`中加入
+```
+LANG="zh_CN.UTF-8"
+LANGUAGE="zh_CN:zh:en_US:en"
+```
+运行`sudo dpkg-reconfigure locales`,重启生效。
+
+## 个人目录下文件夹名称改为英文
 ```
 export LANG=en_US
 xdg-user-dirs-gtk-update
@@ -38,19 +47,11 @@ xdg-user-dirs-gtk-update
 
 官网下载.deb包，双击安装，如果安装失败，添加软件源`ppa:fcitx-team/nightly`双击安装、更改输入法ibus为fcitx，重启即可。
 
-#sublime
-中文输入
-`https://github.com/lyfeyaj/sublime-text-imfix`
 
-Package Control `https://packagecontrol.io/installation`
-Packages:
->- MarkdownEditing
-
-
-
-tree
-sl
-zsh
-https://github.com/robbyrussell/oh-my-zsh
-vim
-git
+杂项
+>- tree
+>- sl
+>- zsh
+>- https://github.com/robbyrussell/oh-my-zsh
+>- vim
+>- git
