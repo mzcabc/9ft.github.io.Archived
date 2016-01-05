@@ -26,6 +26,9 @@ ii  open-vm-tools-desktop   2:9.4.0-1280544-5ubuntu6.2  amd64   Open VMware Tool
 ii  open-vm-tools-lts-trusty    2:9.4.0-1280544-5ubuntu6.2  all Open VMware Tools for virtual machines hosted on VMware (transitional package)
 ```
 
+# 修改时区
+运行`sudo dpkg-reconfigure tzdata`选择时区。
+
 # 显示语言
 ## 终端界面改为中文
 在`/etc/environment`中加入
