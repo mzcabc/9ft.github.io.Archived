@@ -127,6 +127,7 @@ server {
  }
 }
 ```
+修改 `/etc/gitweb.conf` 为 `$projectroot = "/usr/share/nginx/git.mindy.tk";`
 
 使用`htpasswd`创建用户名及其密码.
 ```
@@ -140,7 +141,8 @@ htpasswd /etc/nginx/passwd user1
 注意检查一下 test.git 的权限， 如果权限不足的话， 使用这个命令设置一下权限:  
 `chmod a+rw -R test.git`
 
-设置`Hook`
+设置`Hook`  
+[How To Deploy Jekyll Blogs with Git][6]
 ```bash
 cd hooks
 vi post-receive
@@ -165,3 +167,4 @@ exit
 [3]:https://www.digitalocean.com/community/tutorials/how-to-get-started-with-jekyll-on-an-ubuntu-vps
 [4]:http://beginor.github.io/2016/03/12/http-git-server-on-nginx.html
 [5]:http://weininger.net/configuration-of-nginx-for-gitweb-and-git-http-backend.html
+[6]:https://www.digitalocean.com/community/tutorials/how-to-deploy-jekyll-blogs-with-git
