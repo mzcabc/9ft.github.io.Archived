@@ -29,6 +29,7 @@ description:
 
 # 安装 Jekyll
 参照 [Jekyll Quick-start Instructions][2].
+
 ```bash
 gem install jekyll
 jekyll new my-awesome-site
@@ -143,12 +144,12 @@ htpasswd /etc/nginx/passwd user1
 
 设置`Hook`  
 [How To Deploy Jekyll Blogs with Git][6]
-```bash
+```
 cd hooks
 vi post-receive
 ```
 加入
-```bash
+```
 #!/bin/bash -l
 GIT_REPO=$HOME/repos/awesomeblog.git
 TMP_GIT_CLONE=$HOME/tmp/git/awesomeblog
@@ -159,6 +160,7 @@ jekyll build --source $TMP_GIT_CLONE --destination $PUBLIC_WWW
 rm -Rf $TMP_GIT_CLONE
 exit
 ```
+`chmod +x post-receive`
 
 # Enjoy
 
