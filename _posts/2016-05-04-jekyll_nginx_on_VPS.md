@@ -143,7 +143,7 @@ htpasswd /etc/nginx/passwd user1
 `chmod a+rw -R test.git`
 
 设置`Hook`  
-[How To Deploy Jekyll Blogs with Git][6]
+[How To Deploy Jekyll Blogs with Git][6]  [Deployment methods][7]
 ```
 cd hooks
 vi post-receive
@@ -170,3 +170,4 @@ exit
 [4]:http://beginor.github.io/2016/03/12/http-git-server-on-nginx.html
 [5]:http://weininger.net/configuration-of-nginx-for-gitweb-and-git-http-backend.html
 [6]:https://www.digitalocean.com/community/tutorials/how-to-deploy-jekyll-blogs-with-git
+[7]:http://jekyllrb.com/docs/deployment-methods/
