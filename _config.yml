@@ -15,6 +15,7 @@ filter: 'tag'
 
 
 # Social account
+social: false
 # twitter:  username
 # weibo:    ID
 # github:   username

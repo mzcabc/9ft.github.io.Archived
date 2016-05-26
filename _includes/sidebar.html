@@ -7,7 +7,10 @@
     <div id="sidebar-social">
       <a href="{{ "/feed.xml" | prepend: site.baseurl }}" class="sidebar-social-icon feed"></a>
       <a href="mailto:{{ site.email }}" class="sidebar-social-icon email"></a>
-      {% include social.html %}
+
+      {% if site.social %}
+        {% include social.html %}
+      {% endif %}
     </div>
 
     <ul id="sidebar-tags">
