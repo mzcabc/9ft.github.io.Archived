@@ -1,0 +1,809 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Your awesome title</title>
+    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</description>
+    <link>http://yourdomain.com/</link>
+    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 27 May 2016 01:23:06 +0800</pubDate>
+    <lastBuildDate>Fri, 27 May 2016 01:23:06 +0800</lastBuildDate>
+    <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>HEXO</title>
+        <description>&lt;p&gt;HEXO有好看的主题，换HEXO&lt;/p&gt;
+</description>
+        <pubDate>Fri, 06 May 2016 00:00:00 +0800</pubDate>
+        <link>http://yourdomain.com/%E6%8A%80%E6%9C%AF/2016/05/06/HEXO.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/%E6%8A%80%E6%9C%AF/2016/05/06/HEXO.html</guid>
+        
+        
+        <category>技术</category>
+        
+      </item>
+    
+      <item>
+        <title>Ubuntu 下安装 LNMP</title>
+        <description>&lt;h1 id=&quot;lamp&quot;&gt;安装 &lt;code class=&quot;highlighter-rouge&quot;&gt;LAMP&lt;/code&gt;&lt;/h1&gt;
+&lt;p&gt;咦？我们要安装 &lt;code class=&quot;highlighter-rouge&quot;&gt;LNMP&lt;/code&gt;, 为什么要安装 &lt;code class=&quot;highlighter-rouge&quot;&gt;LAMP&lt;/code&gt; 呢, 因为Ubuntu安装 &lt;code class=&quot;highlighter-rouge&quot;&gt;LAMP&lt;/code&gt; 超级方便. 要其中的 &lt;code class=&quot;highlighter-rouge&quot;&gt;MP&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install lamp-server^
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;php5-fpm&lt;/code&gt; 和 &lt;code class=&quot;highlighter-rouge&quot;&gt;php5-mcrypt&lt;/code&gt; 必须安装. 没安装上的话要手动安装. 其中:
+- &lt;code class=&quot;highlighter-rouge&quot;&gt;php5-fpm&lt;/code&gt; 是 FastCGI Process Manager，是 Nginx 配合 PHP 所必须使用的.
+- &lt;code class=&quot;highlighter-rouge&quot;&gt;php5-mcrypt&lt;/code&gt; 是 phpMyAdmin 需要使用到的.&lt;/p&gt;
+
+&lt;h1 id=&quot;nginx&quot;&gt;安装配置 &lt;code class=&quot;highlighter-rouge&quot;&gt;Nginx&lt;/code&gt;&lt;/h1&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;安装&lt;/h2&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install nginx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;## 配置&lt;/p&gt;
+
+&lt;h3 id=&quot;html&quot;&gt;部署 &lt;code class=&quot;highlighter-rouge&quot;&gt;HTML&lt;/code&gt;&lt;/h3&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;listen&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;listen&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;usr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;share&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;nginx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;htm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;server_name&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;try_files&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$uri&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$uri&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;404&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;php&quot;&gt;部署 &lt;code class=&quot;highlighter-rouge&quot;&gt;PHP&lt;/code&gt;&lt;/h3&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;listen&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;listen&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;server_name&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;usr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;share&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;nginx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;htm&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;php&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;try_files&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$uri&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$uri&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;404&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;php$&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;fastcgi_pass&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;unix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/var/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;php5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fpm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;fastcgi_index&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;php&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fastcgi_params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;ht &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{
+&lt;/span&gt;    &lt;span class=&quot;nx&quot;&gt;deny&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;PHP&lt;/code&gt; 可以通过写个探针测试配置是否正确
+&lt;code class=&quot;highlighter-rouge&quot;&gt;php
+&amp;lt;?php phpinfo(); ?&amp;gt;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;phpmyadmin&quot;&gt;安装配置 &lt;code class=&quot;highlighter-rouge&quot;&gt;phpmyadmin&lt;/code&gt;&lt;/h1&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;安装&lt;/h2&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install phpmyadmin
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;配置&lt;/h2&gt;
+&lt;p&gt;仿照上一节&lt;code class=&quot;highlighter-rouge&quot;&gt;部署 PHP&lt;/code&gt;中为 &lt;code class=&quot;highlighter-rouge&quot;&gt;phpmyadmin&lt;/code&gt; 设置访问入口.
+```javascript
+server {
+  listen 80;
+  listen [::]:80;
+  server_name phpmyadmin.example.com;
+  root /usr/share/phpmyadmin;
+  index index.php;&lt;/p&gt;
+
+&lt;p&gt;location / {
+    try_files $uri $uri/ =404;
+  }&lt;/p&gt;
+
+&lt;p&gt;location ~ .php$ {
+    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    fastcgi_index index.php;
+    include fastcgi_params;
+  }
+  location ~ /.ht {
+    deny all;
+  }
+}
+```&lt;/p&gt;
+
+&lt;h2 id=&quot;mcrypt--php-&quot;&gt;缺少 &lt;code class=&quot;highlighter-rouge&quot;&gt;mcrypt&lt;/code&gt; 扩展。请检查 &lt;code class=&quot;highlighter-rouge&quot;&gt;PHP&lt;/code&gt; 配置&lt;/h2&gt;
+
+&lt;p&gt;如果出现&lt;code class=&quot;highlighter-rouge&quot;&gt;缺少 mcrypt 扩展。请检查 PHP 配置。&lt;/code&gt;的提示.&lt;/p&gt;
+
+&lt;p&gt;执行 &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo apt-get install php5-mcrypt&lt;/code&gt;&lt;br /&gt;
+配置&lt;code class=&quot;highlighter-rouge&quot;&gt;php.ini&lt;/code&gt;，加上&lt;code class=&quot;highlighter-rouge&quot;&gt;extension=php_mcrypt.so&lt;/code&gt;, 修改结果:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;;;;;;;;;;;;;;;;;;;;;;;
+; Dynamic Extensions ;
+;;;;;;;;;;;;;;;;;;;;;;
+;
+; If you wish to have an extension loaded automatically, use the following
+
+extension=php_mcrypt.so
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Thu, 05 May 2016 00:00:00 +0800</pubDate>
+        <link>http://yourdomain.com/%E6%8A%80%E6%9C%AF/2016/05/05/LNMP_on_Ubuntu.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/%E6%8A%80%E6%9C%AF/2016/05/05/LNMP_on_Ubuntu.html</guid>
+        
+        
+        <category>技术</category>
+        
+      </item>
+    
+      <item>
+        <title>VPS上搭建 jekyll + nginx 博客</title>
+        <description>&lt;p&gt;买个版瓦工VPS，想着把个人博客迁移过去，发现安装mysql时出错，简单的查一下，好像是因为内存不足。好吧，那就不折腾LEMP了，干脆装一个jekyll好啦。&lt;/p&gt;
+
+&lt;h1 id=&quot;ruby&quot;&gt;安装 Ruby&lt;/h1&gt;
+&lt;p&gt;这里使用&lt;code class=&quot;highlighter-rouge&quot;&gt;RVM&lt;/code&gt;安装，参照&lt;a href=&quot;https://rvm.io/rvm/install&quot;&gt;Installing RVM&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Before any other step install mpapis public key (might need gpg2) (see security)&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Install RVM (development version):&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;\curl -sSL https://get.rvm.io | bash&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Display a list of all known rubies.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;rvm list known&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Install a version of Ruby (eg 2.2)&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;rvm install 2.2&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Check this worked correctly
+&lt;code class=&quot;highlighter-rouge&quot;&gt;ruby -v&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;jekyll&quot;&gt;安装 Jekyll&lt;/h1&gt;
+&lt;p&gt;参照 &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll Quick-start Instructions&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem install jekyll
+jekyll new my-awesome-site
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;my-awesome-site
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;jekyll-&quot;&gt;部署 Jekyll 生成的网站&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll build --source ~/my-awesome-site --destination /var/www/awesomeblog
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;nginx&quot;&gt;配置 Nginx&lt;/h1&gt;
+&lt;p&gt;复制默认配置文件&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/example.com&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;参照 &lt;a href=&quot;https://www.digitalocean.com/community/tutorials/how-to-get-started-with-jekyll-on-an-ubuntu-vps&quot;&gt;How To Get Started with Jekyll on an Ubuntu VPS&lt;/a&gt; 在 &lt;code class=&quot;highlighter-rouge&quot;&gt;example.com&lt;/code&gt; 中写一个最简单的配置文件:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+server {
+  listen 80;
+  # the domain of your VPS
+  server_name example.com;
+  root /home/deployer/blog/current;
+  index index.html
+  expires 1d;
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Using symlinks means it’s easy to take a site offline by removing the symlink without touching the original configuration file.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/example.com&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Tests the nginx configuration.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo nginx -t&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Restart nginx.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo service nginx restart&lt;/code&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;http--git-&quot;&gt;架设 &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; 协议的 &lt;code class=&quot;highlighter-rouge&quot;&gt;Git&lt;/code&gt; 服务器&lt;/h1&gt;
+&lt;p&gt;安装 &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo apt-get install git gitweb fcgiwrap&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;参照 &lt;a href=&quot;http://beginor.github.io/2016/03/12/http-git-server-on-nginx.html&quot;&gt;在 Ubuntu 系统上配置 Nginx Git 服务器&lt;/a&gt; 和 &lt;a href=&quot;http://weininger.net/configuration-of-nginx-for-gitweb-and-git-http-backend.html&quot;&gt;NGINX Configuration for Gitweb and git-http-backend&lt;/a&gt; 中的配置.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# HTTP server
+server {
+  listen 80;
+  listen [::]:80;
+  server_name git.mindy.tk;
+  root /usr/share/gitweb;
+  access_log /var/log/nginx/git.mindy.tk.access.log;
+  error_log /var/log/nginx/git.mindy.tk.error.log;
+
+  #ssl                  on;
+  #ssl_certificate      /etc/ssl/certs/certforyoursite.crt;
+  #ssl_certificate_key  /etc/ssl/private/sitekey.pem;
+  #ssl_session_timeout 5m;
+  #ssl_protocols        TLSv1 TLSv1.1 TLSv1.2;
+  #ssl_ciphers          HIGH:!ADH:!MD5;
+  #ssl_prefer_server_ciphers on;
+
+  # static repo files for cloning over https
+  location ~ ^.*\.git/objects/([0-9a-f]+/[0-9a-f]+|pack/pack-[0-9a-f]+.(pack|idx))$ {
+    auth_basic &quot;Restricted&quot;;
+    auth_basic_user_file /etc/nginx/passwd;
+
+    root /var/www/git.mindy.tk;
+  }
+
+  # requests that need to go to git-http-backend
+  location ~ ^.*\.git/(HEAD|info/refs|objects/info/.*|git-(upload|receive)-pack)$ {
+    auth_basic &quot;Restricted&quot;;
+    auth_basic_user_file /etc/nginx/passwd;
+
+    root /var/www/git.mindy.tk;
+
+    fastcgi_pass unix:/var/run/fcgiwrap.socket;
+    fastcgi_param SCRIPT_FILENAME   /usr/lib/git-core/git-http-backend;
+    fastcgi_param PATH_INFO         $uri;
+    fastcgi_param GIT_PROJECT_ROOT  /var/www/git.mindy.tk;
+    fastcgi_param GIT_HTTP_EXPORT_ALL &quot;&quot;;
+    fastcgi_param REMOTE_USER $remote_user;
+    include fastcgi_params;
+  }
+
+  # send anything else to gitweb if it&#39;s not a real file
+  try_files $uri @gitweb;
+  location @gitweb {
+    root /usr/share/gitweb;
+    auth_basic &quot;Restricted&quot;;
+    auth_basic_user_file /etc/nginx/passwd;
+
+    fastcgi_pass unix:/var/run/fcgiwrap.socket;
+    fastcgi_param SCRIPT_FILENAME   /usr/share/gitweb/gitweb.cgi;
+    fastcgi_param PATH_INFO         $uri;
+    fastcgi_param GITWEB_CONFIG     /etc/gitweb.conf;
+    include fastcgi_params;
+ }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;修改 &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/gitweb.conf&lt;/code&gt; 为 &lt;code class=&quot;highlighter-rouge&quot;&gt;$projectroot = &quot;/usr/share/nginx/git.mindy.tk&quot;;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;使用&lt;code class=&quot;highlighter-rouge&quot;&gt;htpasswd&lt;/code&gt;创建用户名及其密码.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+htpasswd /etc/nginx/passwd user1
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;建立与本地仓库的连接&lt;/h1&gt;
+&lt;p&gt;服务器上建立裸仓库
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git init --bare test.git&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;注意检查一下 test.git 的权限， 如果权限不足的话， 使用这个命令设置一下权限:&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;chmod a+rw -R test.git&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;设置&lt;code class=&quot;highlighter-rouge&quot;&gt;Hook&lt;/code&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.digitalocean.com/community/tutorials/how-to-deploy-jekyll-blogs-with-git&quot;&gt;How To Deploy Jekyll Blogs with Git&lt;/a&gt;  &lt;a href=&quot;http://jekyllrb.com/docs/deployment-methods/&quot;&gt;Deployment methods&lt;/a&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+cd hooks
+vi post-receive
+&lt;/code&gt;
+加入
+```
+#!/bin/bash -l
+GIT_REPO=$HOME/repos/awesomeblog.git
+TMP_GIT_CLONE=$HOME/tmp/git/awesomeblog
+PUBLIC_WWW=/var/www/awesomeblog&lt;/p&gt;
+
+&lt;p&gt;git clone $GIT_REPO $TMP_GIT_CLONE
+jekyll build –source $TMP_GIT_CLONE –destination $PUBLIC_WWW
+rm -Rf $TMP_GIT_CLONE
+exit
+```
+&lt;code class=&quot;highlighter-rouge&quot;&gt;chmod +x post-receive&lt;/code&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;enjoy&quot;&gt;Enjoy&lt;/h1&gt;
+
+</description>
+        <pubDate>Wed, 04 May 2016 00:00:00 +0800</pubDate>
+        <link>http://yourdomain.com/%E6%8A%80%E6%9C%AF/2016/05/04/jekyll_nginx_on_VPS.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/%E6%8A%80%E6%9C%AF/2016/05/04/jekyll_nginx_on_VPS.html</guid>
+        
+        
+        <category>技术</category>
+        
+      </item>
+    
+      <item>
+        <title>Ubuntu的LAMP+Tomcat+FTP安装</title>
+        <description>&lt;p&gt;&lt;del&gt;连续折腾了三天LAMP+TOMCAT，主要问题是TOMECAT间歇性挂掉。不知道问题出在哪。&lt;/del&gt;
+日志里是这样的：
+```
+SEVERE: The web application [/app] registered the JDBC driver [com.mysql.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.&lt;/p&gt;
+
+&lt;p&gt;Dec 02, 2015 3:52:50 AM org.apache.catalina.loader.WebappClassLoader clearReferencesThreads&lt;/p&gt;
+
+&lt;p&gt;SEVERE: The web application [/app] appears to have started a thread named [MySQL Statement Cancellation Timer] but has failed to stop it. This is very likely to create a memory leak.
+```&lt;/p&gt;
+</description>
+        <pubDate>Mon, 30 Nov 2015 00:00:00 +0800</pubDate>
+        <link>http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/11/30/LAMP_Tomcat_FTP.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/11/30/LAMP_Tomcat_FTP.html</guid>
+        
+        
+        <category>技术</category>
+        
+      </item>
+    
+      <item>
+        <title>运行第一个Cuda程序</title>
+        <description>&lt;p&gt;Cuba 中的 Hello World&lt;/p&gt;
+
+&lt;p&gt;Platform: SUSE Linux&lt;/p&gt;
+
+&lt;p&gt;CUDA Version: cuda_7.5.18_linux.run&lt;/p&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;安装软件&lt;/h1&gt;
+&lt;p&gt;安装驱动和CUDA，安装驱动的时候发现CUDA中包含驱动了，所以只&lt;a href=&quot;https://developer.nvidia.com/cuda-downloads&quot;&gt;下载&lt;/a&gt;安装CUDA即可。&lt;/p&gt;
+
+&lt;h1 id=&quot;section-1&quot;&gt;环境变量&lt;/h1&gt;
+&lt;p&gt;确保:
+&amp;gt;- &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/cuda-7.5&lt;/code&gt; 在&lt;code class=&quot;highlighter-rouge&quot;&gt;PATH&lt;/code&gt;中
+&amp;gt;- &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/cuda-7.5/lib64&lt;/code&gt; 在 &lt;code class=&quot;highlighter-rouge&quot;&gt;LD_LIBRARY_PATH&lt;/code&gt; 中, 或在&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/ld.so.conf&lt;/code&gt;中加入&lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/cuda-7.5/lib64&lt;/code&gt;并运行&lt;code class=&quot;highlighter-rouge&quot;&gt;ldconfig&lt;/code&gt;使之生效。
+使用&lt;code class=&quot;highlighter-rouge&quot;&gt;nvcc&lt;/code&gt;命令测试是否成功。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;设置和查看环境变量&lt;/h2&gt;
+&lt;p&gt;在&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/profile&lt;/code&gt;中添加&lt;code class=&quot;highlighter-rouge&quot;&gt;export PATH=&quot;&amp;lt;PATH DIR&amp;gt;:$PATH&quot;&lt;/code&gt;,&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;source /etc/profile&lt;/code&gt;使之生效&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;export&lt;/code&gt;: 查看PATH
+&lt;code class=&quot;highlighter-rouge&quot;&gt;echo $PATH&lt;/code&gt;: 单独查看 PATH&lt;/p&gt;
+
+&lt;h1 id=&quot;section-3&quot;&gt;运行&lt;/h1&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;nvcc helloCuda.cu&lt;/code&gt; :编译 helloCuda.cu
+&lt;code class=&quot;highlighter-rouge&quot;&gt;./a.out&lt;/code&gt; : 运行&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 24 Oct 2015 00:00:00 +0800</pubDate>
+        <link>http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/24/whow-to-run-cuda.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/24/whow-to-run-cuda.html</guid>
+        
+        
+        <category>技术</category>
+        
+      </item>
+    
+      <item>
+        <title>Linux不能进入x window</title>
+        <description>&lt;p&gt;老师给我分配一个GPU工作站，刚开机好像我把&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/X11/xorg.conf&lt;/code&gt;搞坏了，导致不能进入x window, 可把我急坏了，按照&lt;a href=&quot;https://www.freebsd.org/doc/zh_CN.UTF-8/books/handbook/x-config.html&quot; title=&quot;配置 X11&quot;&gt;这里&lt;/a&gt;的步骤做下来就好，发现自己太菜了，记录下来。。&lt;/p&gt;
+
+&lt;p&gt;解决方法就是重新生成一个&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/X11/xorg.conf&lt;/code&gt;文件&lt;/p&gt;
+
+&lt;h3 id=&quot;etcx11xorgconf&quot;&gt;生成新的&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/X11/xorg.conf&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;第一步是以超级用户的身份建立初始的配置文件：
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+# Xorg -configure
+&lt;/code&gt;
+下一步是测试现存的配置文件(不建议用这个，会黑屏，不知道情况的会抓狂)
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+# Xorg -config xorg.conf.new
+&lt;/code&gt;
+通过 retro 选项使用旧的模式：
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+# Xorg -config xorg.conf.new -retro
+&lt;/code&gt;
+使用组合键&lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl+Alt+Fn&lt;/code&gt;回到终端.
+最后一步将新的&lt;code class=&quot;highlighter-rouge&quot;&gt;xorg.conf&lt;/code&gt;放到他该在的位置。
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+# cp xorg.conf.new /etc/X11/xorg.conf
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;如此简单&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 22 Oct 2015 00:00:00 +0800</pubDate>
+        <link>http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/22/x-window-fix.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/22/x-window-fix.html</guid>
+        
+        
+        <category>技术</category>
+        
+      </item>
+    
+      <item>
+        <title>Windows下使用Git的配置</title>
+        <description>&lt;p&gt;Win下Git客户端我用的是&lt;code class=&quot;highlighter-rouge&quot;&gt;PortableGit&lt;/code&gt;，只要将&lt;code class=&quot;highlighter-rouge&quot;&gt;PortableGit\bin&lt;/code&gt;放进环境变量里就能用了。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ssh key&lt;/code&gt;的文件夹&lt;code class=&quot;highlighter-rouge&quot;&gt;.ssh&lt;/code&gt;不是放在&lt;code class=&quot;highlighter-rouge&quot;&gt;用户目录&lt;/code&gt;下，而是放在&lt;code class=&quot;highlighter-rouge&quot;&gt;PortableGit&lt;/code&gt;的目录下。然后就能在win下愉快的使用Git了。&lt;/p&gt;
+</description>
+        <pubDate>Sun, 18 Oct 2015 00:00:00 +0800</pubDate>
+        <link>http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/18/git-win-ssh.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/18/git-win-ssh.html</guid>
+        
+        
+        <category>技术</category>
+        
+      </item>
+    
+      <item>
+        <title>sublime 配置</title>
+        <description>&lt;p&gt;记录sublime的使用&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;show_full_path&quot;: false&lt;/code&gt; 标题仅显示文件名，不显示路径。&lt;/p&gt;
+
+&lt;p&gt;中文输入
+&lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/lyfeyaj/sublime-text-imfix&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Package Control &lt;code class=&quot;highlighter-rouge&quot;&gt;https://packagecontrol.io/installation&lt;/code&gt;
+Packages:
+&amp;gt;- MarkdownEditing&lt;/p&gt;
+</description>
+        <pubDate>Sat, 17 Oct 2015 00:00:00 +0800</pubDate>
+        <link>http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/17/sublime-config.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/17/sublime-config.html</guid>
+        
+        
+        <category>技术</category>
+        
+      </item>
+    
+      <item>
+        <title>Ubuntu 配置</title>
+        <description>&lt;p&gt;虽然Linux不太会用，可是比较喜欢装系统。本文记录Ubuntu下自己用的配置和软件包，方便装系统后快速折腾。&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;虚拟机下安装&lt;/h2&gt;
+&lt;p&gt;### open-vm-tools
+在装VMware Tools时，官方推荐用&lt;code class=&quot;highlighter-rouge&quot;&gt;open-vm-tools&lt;/code&gt;了，听官方的。
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+apt-get install open-vm-tools
+#vm-tools安装方法。
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;没搞懂，我的系统是Ubuntu 14.04LTS，总共装了四个包才搞定,使用&lt;code class=&quot;highlighter-rouge&quot;&gt;dpkg -l|grep open-vm&lt;/code&gt;查看安装的包不知道哪个是多余的。：
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+mindy@dog:~$ dpkg -l|grep open-vm
+ii  open-vm-toolbox-lts-trusty  2:9.4.0-1280544-5ubuntu6.2  all Open VMware Tools for virtual machines hosted on VMware (transitional package)
+ii  open-vm-tools-desktop2:9.4.0-1280544-5ubuntu6.2 amd64   Open VMware Tools for virtual machines hosted on VMware (CLI)
+ii  open-vm-tools-desktop   2:9.4.0-1280544-5ubuntu6.2  amd64   Open VMware Tools for virtual machines hosted on VMware (GUI)
+ii  open-vm-tools-lts-trusty    2:9.4.0-1280544-5ubuntu6.2  all Open VMware Tools for virtual machines hosted on VMware (transitional package)
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;section-1&quot;&gt;修改时区&lt;/h1&gt;
+&lt;p&gt;运行&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo dpkg-reconfigure tzdata&lt;/code&gt;选择时区。&lt;/p&gt;
+
+&lt;h1 id=&quot;section-2&quot;&gt;显示语言&lt;/h1&gt;
+&lt;p&gt;## 终端界面改为中文
+在&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/environment&lt;/code&gt;中加入
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+LANG=&quot;zh_CN.UTF-8&quot;
+LANGUAGE=&quot;zh_CN:zh:en_US:en&quot;
+&lt;/code&gt;
+运行&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo dpkg-reconfigure locales&lt;/code&gt;,重启生效。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;个人目录下文件夹名称改为英文&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;export LANG=en_US
+xdg-user-dirs-gtk-update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;据我观察&lt;code class=&quot;highlighter-rouge&quot;&gt;xdg-user-dirs-gtk-update&lt;/code&gt;命令是在&lt;code class=&quot;highlighter-rouge&quot;&gt;~/.config/user-dirs.dirs&lt;/code&gt;中写入了配置。&lt;/p&gt;
+
+&lt;p&gt;#搜狗输入法
+以前用的ibus的谷歌拼音也不错，不过貌似也不怎么维护，上搜狗！&lt;/p&gt;
+
+&lt;p&gt;官网下载.deb包，双击安装，如果安装失败，添加软件源&lt;code class=&quot;highlighter-rouge&quot;&gt;ppa:fcitx-team/nightly&lt;/code&gt;双击安装、更改输入法ibus为fcitx，重启即可。&lt;/p&gt;
+
+&lt;p&gt;杂项
+&amp;gt;- tree
+&amp;gt;- sl
+&amp;gt;- zsh
+&amp;gt;- https://github.com/robbyrussell/oh-my-zsh
+&amp;gt;- vim
+&amp;gt;- git&lt;/p&gt;
+</description>
+        <pubDate>Wed, 14 Oct 2015 00:00:00 +0800</pubDate>
+        <link>http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/14/ubuntu-installation.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/14/ubuntu-installation.html</guid>
+        
+        
+        <category>技术</category>
+        
+      </item>
+    
+      <item>
+        <title>v_p_n 架设</title>
+        <description>&lt;p&gt;###架构
+&amp;gt;- 使用 Openswan 作为 IPsec 服务器;
+&amp;gt;- 使用 xl2tpd 提供 L2TP 支持;
+&amp;gt;- 使用 ppp 提供用户认证&lt;/p&gt;
+
+&lt;p&gt;###环境
+&amp;gt;- Linode
+&amp;gt;- Ubuntu 14.04 64bit&lt;/p&gt;
+
+&lt;p&gt;###架设步骤
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+sudo apt-get install openswan xl2tpd ppp lsof
+# 安装软件包，会有设置向导，全部 Enter 使用默认设置 
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;##配置
+###防火墙 iptables 和 sysctl 的设置
+```
+sudo iptables -t nat -A POSTROUTING -j SNAT –to-source %SERVERIP% -o eth+
+#%SERVERIP% 替换成你的服务器 IP；eth+ 通配符&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;echo “net.ipv4.ip_forward = 1”&lt;/td&gt;
+      &lt;td&gt;tee -a /etc/sysctl.conf&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;echo “net.ipv4.conf.all.accept_redirects = 0”&lt;/td&gt;
+      &lt;td&gt;tee -a /etc/sysctl.conf&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;echo “net.ipv4.conf.all.send_redirects = 0”&lt;/td&gt;
+      &lt;td&gt;tee -a /etc/sysctl.conf&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;echo “net.ipv4.conf.default.rp_filter = 0”&lt;/td&gt;
+      &lt;td&gt;tee -a /etc/sysctl.conf&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;echo “net.ipv4.conf.default.accept_source_route = 0”&lt;/td&gt;
+      &lt;td&gt;tee -a /etc/sysctl.conf&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;echo “net.ipv4.conf.default.send_redirects = 0”&lt;/td&gt;
+      &lt;td&gt;tee -a /etc/sysctl.conf&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;echo “net.ipv4.icmp_ignore_bogus_error_responses = 1”&lt;/td&gt;
+      &lt;td&gt;tee -a /etc/sysctl.conf&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;for vpn in /proc/sys/net/ipv4/conf/*; do echo 0 &amp;gt; $vpn/accept_redirects; echo 0 &amp;gt; $vpn/send_redirects; done&lt;/p&gt;
+
+&lt;p&gt;sysctl -p
+#应用设置
+```&lt;/p&gt;
+
+&lt;p&gt;###添加自启
+在&lt;code class=&quot;highlighter-rouge&quot;&gt;rc.local&lt;/code&gt;中添加：
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+for vpn in /proc/sys/net/ipv4/conf/*; do echo 0 &amp;gt; $vpn/accept_redirects; echo 0 &amp;amp;gt; $vpn/send_redirects; done
+iptables -t nat -A POSTROUTING -j SNAT --to-source %SERVERIP% -o eth+
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;###配置 Openswan (IPSEC)
+在&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/ipsec.conf&lt;/code&gt;中：
+修改为&lt;code class=&quot;highlighter-rouge&quot;&gt;left=%SERVERIP%&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;protostack=netkey&lt;/code&gt;。
+&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/ipsec.conf&lt;/code&gt;完整文件：
+```
+version 2.0 # conforms to second version of ipsec.conf specification&lt;/p&gt;
+
+&lt;h1 id=&quot;basic-configuration&quot;&gt;basic configuration&lt;/h1&gt;
+&lt;p&gt;config setup
+    # Do not set debug options to debug configuration issues!
+    # plutodebug / klipsdebug = “all”, “none” or a combation from below:
+    # “raw crypt parsing emitting control klips pfkey natt x509 dpd private”
+    # eg:
+    # plutodebug=”control parsing”
+    # Again: only enable plutodebug or klipsdebug when asked by a developer
+    #
+    # enable to get logs per-peer
+    # plutoopts=”–perpeerlog”
+    #
+    # Enable core dumps (might require system changes, like ulimit -C)
+    # This is required for abrtd to work properly
+    # Note: incorrect SElinux policies might prevent pluto writing the core
+    dumpdir=/var/run/pluto/
+    #
+    # NAT-TRAVERSAL support, see README.NAT-Traversal
+    nat_traversal=yes
+    # exclude networks used on server side by adding %v4:!a.b.c.0/24
+    # It seems that T-Mobile in the US and Rogers/Fido in Canada are
+    # using 25/8 as “private” address space on their 3G network.
+    # This range has not been announced via BGP (at least upto 2010-12-21)
+    virtual_private=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12,%v4:25.0.0.0/8,%v6:fd00::/8,%v6:fe80::/10
+    # OE is now off by default. Uncomment and change to on, to enable.
+    oe=off
+    # which IPsec stack to use. auto will try netkey, then klips then mast
+    protostack=netkey
+    # Use this to log to a file, or disable logging on embedded systems (like openwrt)
+    #plutostderrlog=/dev/null&lt;/p&gt;
+
+&lt;h1 id=&quot;add-connections-here&quot;&gt;Add connections here&lt;/h1&gt;
+
+&lt;h1 id=&quot;sample-vpn-connection&quot;&gt;sample VPN connection&lt;/h1&gt;
+&lt;p&gt;# for more examples, see /etc/ipsec.d/examples/
+#conn sample
+#       # Left security gateway, subnet behind it, nexthop toward right.
+#       left=10.0.0.1
+#       leftsubnet=172.16.0.0/24
+#       leftnexthop=10.22.33.44
+#       # Right security gateway, subnet behind it, nexthop toward left.
+#       right=10.12.12.1
+#       rightsubnet=192.168.0.0/24
+#       rightnexthop=10.101.102.103
+#       # To authorize this connection, but not actually start it, 
+#       # at startup, uncomment this.
+#       #auto=add
+conn L2TP-PSK-noNAT
+    authby=secret
+    #shared secret. Use rsasig for certificates.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pfs=no
+#Disable pfs
+
+auto=add
+#the ipsec tunnel should be started and routes created when the ipsec daemon itself starts.
+
+keyingtries=3
+#Only negotiate a conn. 3 times.
+
+ikelifetime=8h
+keylife=1h
+
+ike=aes256-sha1;modp1024!
+phase2alg=aes256-sha1;modp1024
+# specifies the phase 1 encryption scheme, the hashing algorithm, and the diffie-hellman group. The modp1024 is for Diffie-Hellman 2. Why &#39;modp&#39; instead of dh? DH2 is a 1028 bit encryption algorithm that modulo&#39;s a prime number, e.g. modp1028. See RFC 5114 for details or the wiki page on diffie hellmann, if interested.
+
+type=transport
+#because we use l2tp as tunnel protocol
+
+left=%SERVERIP%
+#fill in server IP above
+
+leftprotoport=17/1701
+right=%any
+rightprotoport=17/%any
+
+dpddelay=10
+# Dead Peer Dectection (RFC 3706) keepalives delay
+dpdtimeout=20
+#  length of time (in seconds) we will idle without hearing either an R_U_THERE poll from our peer, or an R_U_THERE_ACK reply.
+dpdaction=clear
+# When a DPD enabled peer is declared dead, what action should be taken. clear means the eroute and SA with both be cleared. ```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;修改 ipsec.secrets
+&amp;gt;- 获取服务器 IP: &lt;code class=&quot;highlighter-rouge&quot;&gt;curl http://ip.mtak.nl&lt;/code&gt;
+&amp;gt;- 生成随机密匙:  &lt;code class=&quot;highlighter-rouge&quot;&gt;openssl rand -hex 30&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;设置IPSec握手时的的 Shared Secret,&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/ipsec.secrets&lt;/code&gt;修改为
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+%SERVERIP%  %any:   PSK &quot;%Shared Secret%&quot;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;验证 IPSEC 是否正常工作 &lt;code class=&quot;highlighter-rouge&quot;&gt;ipsec verify&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;遇到的问题
+&amp;gt;- &lt;code class=&quot;highlighter-rouge&quot;&gt;NETKEY:  Testing XFRM related proc values                 [FAILED]&lt;/code&gt;应该是忘记修改网络策略,解决方法&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for each in /proc/sys/net/ipv4/conf/*
+do
+    echo 0 &amp;gt; $each/accept_redirects
+    echo 0 &amp;gt; $each/send_redirects
+done
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Hardware RNG detected, testing if used properly            [FAILED]&lt;/code&gt;
+解决方法&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install rng-tools
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;再次验证 IPSEC &lt;code class=&quot;highlighter-rouge&quot;&gt;ipsec verify&lt;/code&gt;，终于正常。&lt;/p&gt;
+
+&lt;p&gt;###配置 xl2tpd&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/xl2tpd/xl2tpd.conf&lt;/code&gt;修改成：
+```
+[global]
+ipsec saref = yes
+saref refinfo = 30&lt;/p&gt;
+
+&lt;p&gt;;debug avp = yes
+;debug network = yes
+;debug state = yes
+;debug tunnel = yes&lt;/p&gt;
+
+&lt;p&gt;[lns default]
+ip range = 172.16.1.30-172.16.1.100
+local ip = 172.16.1.1
+refuse pap = yes
+require authentication = yes
+;ppp debug = yes
+pppoptfile = /etc/ppp/options.xl2tpd
+length bit = yes
+```&lt;/p&gt;
+
+&lt;p&gt;###用户认证
+编辑&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/xl2tpd/xl2tpd.conf&lt;/code&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+# 增加这一行：
+unix authentication = yes
+# 删除这一行 
+refuse pap = yes
+&lt;/code&gt;
+更改&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/pam.d/ppp&lt;/code&gt;成:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+auth    required        pam_nologin.so
+auth    required        pam_unix.so
+account required        pam_unix.so
+session required        pam_unix.so
+&lt;/code&gt;
+修改 &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/ppp/options.xl2tpd&lt;/code&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+login
+ms-dns 8.8.8.8
+ms-dns 8.8.4.4
+auth
+mtu 1200
+mru 1000
+crtscts
+hide-password
+modem
+name l2tpd
+proxyarp
+lcp-echo-interval 30
+lcp-echo-failure 4
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;##使用
+###增加用户
+修改&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/ppp/chap-secrets&lt;/code&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+# Secrets for authentication using CHAP
+# client       server  secret                  IP addresses
+user1          l2tpd   pass1                        *
+user2          l2tpd   pass2                        *
+&lt;/code&gt;
+###重启服务
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+/etc/init.d/ipsec restart 
+/etc/init.d/xl2tpd restart
+&lt;/code&gt;
+###查看错误日志
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+/var/log/syslog
+/var/log/auth.log
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;[1] http://phyng.com/digitalocean-ubuntu-vpn.html
+[2] http://blog.fengqijun.me/vpn/2015/03/08/l2tp-ipsec-vpn-on-ubuntu-14/&lt;/p&gt;
+</description>
+        <pubDate>Mon, 12 Oct 2015 00:00:00 +0800</pubDate>
+        <link>http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/12/build-v.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/12/build-v.html</guid>
+        
+        
+        <category>技术</category>
+        
+      </item>
+    
+  </channel>
+</rss>

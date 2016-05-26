@@ -1,0 +1,60 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /> <!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/ie.html"><![endif]--> <title>VPS上搭建 jekyll + nginx 博客</title> <meta name="description" content="买个版瓦工VPS，想着把个人博客迁移过去，发现安装mysql时出错，简单的查一下，好像是因为内存不足。好吧，那就不折腾LEMP了，干脆装一个jekyll好啦。"> <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600|Droid+Sans+Mono' rel='stylesheet' type='text/css'> <link rel="stylesheet" href="/css/main.css"> <link rel="canonical" href="http://yourdomain.com/%E6%8A%80%E6%9C%AF/2016/05/04/jekyll_nginx_on_VPS.html"> <link rel="alternate" type="application/rss+xml" title="Your awesome title" href="http://yourdomain.com/feed.xml" /> <script src="/assets/js/prefixfree.js"></script> </head> <body> <aside id="sidebar"> <div id="sidebar-left"> <a id="sidebar-avatar" href="/"> <img id="sidebar-avatar-img" alt="" src="/assets/img/avatar.jpg"/> </a> <div id="sidebar-social"> <a href="/feed.xml" class="sidebar-social-icon feed"></a> <a href="mailto:your-email@domain.com" class="sidebar-social-icon email"></a> </div> <ul id="sidebar-tags"> <li class="sidebar-tag active" data-filter="all">全部文章</li> </ul> </div> <div id="sidebar-right"> <div id="search-box"> <input id="search-input" type="text" placeholder="Search" /> </div> <nav id="toc"> <a class="toc-link" data-tags="" href="/%E6%8A%80%E6%9C%AF/2016/05/06/HEXO.html"> HEXO </a> <a class="toc-link" data-tags="" href="/%E6%8A%80%E6%9C%AF/2016/05/05/LNMP_on_Ubuntu.html"> Ubuntu 下安装 LNMP </a> <a class="toc-link" data-tags="" href="/%E6%8A%80%E6%9C%AF/2016/05/04/jekyll_nginx_on_VPS.html"> VPS上搭建 jekyll + nginx 博客 </a> <a class="toc-link" data-tags="" href="/%E6%8A%80%E6%9C%AF/2015/11/30/LAMP_Tomcat_FTP.html"> Ubuntu的LAMP+Tomcat+FTP安装 </a> <a class="toc-link" data-tags="" href="/%E6%8A%80%E6%9C%AF/2015/10/24/whow-to-run-cuda.html"> 运行第一个Cuda程序 </a> <a class="toc-link" data-tags="" href="/%E6%8A%80%E6%9C%AF/2015/10/22/x-window-fix.html"> Linux不能进入x window </a> <a class="toc-link" data-tags="" href="/%E6%8A%80%E6%9C%AF/2015/10/18/git-win-ssh.html"> Windows下使用Git的配置 </a> <a class="toc-link" data-tags="" href="/%E6%8A%80%E6%9C%AF/2015/10/17/sublime-config.html"> sublime 配置 </a> <a class="toc-link" data-tags="" href="/%E6%8A%80%E6%9C%AF/2015/10/14/ubuntu-installation.html"> Ubuntu 配置 </a> <a class="toc-link" data-tags="" href="/%E6%8A%80%E6%9C%AF/2015/10/12/build-v.html"> v_p_n 架设 </a> <a class="toc-link" data-tags="" href="/%E6%8A%80%E6%9C%AF/2015/10/12/build-ss.html"> ss搭建 </a> <a class="toc-link" data-tags="" href="/%E6%8A%80%E6%9C%AF/2015/10/11/Hello-World.html"> First Post </a> </nav> </div> </aside> <main id="main"> <article class="post container"> <div class="post-meta"> <span class="post-meta-span date">2016 May 04</span> </div> <h1 class="post-title">VPS上搭建 jekyll + nginx 博客</h1> <p>买个版瓦工VPS，想着把个人博客迁移过去，发现安装mysql时出错，简单的查一下，好像是因为内存不足。好吧，那就不折腾LEMP了，干脆装一个jekyll好啦。</p> <h1 id="ruby">安装 Ruby</h1> <p>这里使用<code class="highlighter-rouge">RVM</code>安装，参照<a href="https://rvm.io/rvm/install">Installing RVM</a></p> <blockquote> <p>Before any other step install mpapis public key (might need gpg2) (see security)<br /> <code class="highlighter-rouge">gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3</code></p> </blockquote> <blockquote> <p>Install RVM (development version):<br /> <code class="highlighter-rouge">\curl -sSL https://get.rvm.io | bash</code></p> </blockquote> <blockquote> <p>Display a list of all known rubies.<br /> <code class="highlighter-rouge">rvm list known</code></p> </blockquote> <blockquote> <p>Install a version of Ruby (eg 2.2)<br /> <code class="highlighter-rouge">rvm install 2.2</code></p> </blockquote> <blockquote> <p>Check this worked correctly <code class="highlighter-rouge">ruby -v</code></p> </blockquote> <h1 id="jekyll">安装 Jekyll</h1> <p>参照 <a href="https://jekyllrb.com/">Jekyll Quick-start Instructions</a>.</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code>gem install jekyll
+jekyll new my-awesome-site
+<span class="nb">cd </span>my-awesome-site
+</code></pre></div> <h1 id="jekyll-">部署 Jekyll 生成的网站</h1> <div class="highlighter-rouge"><pre class="highlight"><code>jekyll build --source ~/my-awesome-site --destination /var/www/awesomeblog
+</code></pre></div> <h1 id="nginx">配置 Nginx</h1> <p>复制默认配置文件<br /> <code class="highlighter-rouge">sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/example.com</code></p> <p>参照 <a href="https://www.digitalocean.com/community/tutorials/how-to-get-started-with-jekyll-on-an-ubuntu-vps">How To Get Started with Jekyll on an Ubuntu VPS</a> 在 <code class="highlighter-rouge">example.com</code> 中写一个最简单的配置文件: <code class="highlighter-rouge"> server { listen 80; # the domain of your VPS server_name example.com; root /home/deployer/blog/current; index index.html expires 1d; } </code></p> <p>Using symlinks means it’s easy to take a site offline by removing the symlink without touching the original configuration file.<br /> <code class="highlighter-rouge">sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/example.com</code></p> <p>Tests the nginx configuration.<br /> <code class="highlighter-rouge">sudo nginx -t</code></p> <p>Restart nginx.<br /> <code class="highlighter-rouge">sudo service nginx restart</code></p> <h1 id="http--git-">架设 <code class="highlighter-rouge">HTTP</code> 协议的 <code class="highlighter-rouge">Git</code> 服务器</h1> <p>安装 <code class="highlighter-rouge">sudo apt-get install git gitweb fcgiwrap</code>.</p> <p>参照 <a href="http://beginor.github.io/2016/03/12/http-git-server-on-nginx.html">在 Ubuntu 系统上配置 Nginx Git 服务器</a> 和 <a href="http://weininger.net/configuration-of-nginx-for-gitweb-and-git-http-backend.html">NGINX Configuration for Gitweb and git-http-backend</a> 中的配置.</p> <div class="highlighter-rouge"><pre class="highlight"><code># HTTP server
+server {
+  listen 80;
+  listen [::]:80;
+  server_name git.mindy.tk;
+  root /usr/share/gitweb;
+  access_log /var/log/nginx/git.mindy.tk.access.log;
+  error_log /var/log/nginx/git.mindy.tk.error.log;
+
+  #ssl                  on;
+  #ssl_certificate      /etc/ssl/certs/certforyoursite.crt;
+  #ssl_certificate_key  /etc/ssl/private/sitekey.pem;
+  #ssl_session_timeout 5m;
+  #ssl_protocols        TLSv1 TLSv1.1 TLSv1.2;
+  #ssl_ciphers          HIGH:!ADH:!MD5;
+  #ssl_prefer_server_ciphers on;
+
+  # static repo files for cloning over https
+  location ~ ^.*\.git/objects/([0-9a-f]+/[0-9a-f]+|pack/pack-[0-9a-f]+.(pack|idx))$ {
+    auth_basic "Restricted";
+    auth_basic_user_file /etc/nginx/passwd;
+
+    root /var/www/git.mindy.tk;
+  }
+
+  # requests that need to go to git-http-backend
+  location ~ ^.*\.git/(HEAD|info/refs|objects/info/.*|git-(upload|receive)-pack)$ {
+    auth_basic "Restricted";
+    auth_basic_user_file /etc/nginx/passwd;
+
+    root /var/www/git.mindy.tk;
+
+    fastcgi_pass unix:/var/run/fcgiwrap.socket;
+    fastcgi_param SCRIPT_FILENAME   /usr/lib/git-core/git-http-backend;
+    fastcgi_param PATH_INFO         $uri;
+    fastcgi_param GIT_PROJECT_ROOT  /var/www/git.mindy.tk;
+    fastcgi_param GIT_HTTP_EXPORT_ALL "";
+    fastcgi_param REMOTE_USER $remote_user;
+    include fastcgi_params;
+  }
+
+  # send anything else to gitweb if it's not a real file
+  try_files $uri @gitweb;
+  location @gitweb {
+    root /usr/share/gitweb;
+    auth_basic "Restricted";
+    auth_basic_user_file /etc/nginx/passwd;
+
+    fastcgi_pass unix:/var/run/fcgiwrap.socket;
+    fastcgi_param SCRIPT_FILENAME   /usr/share/gitweb/gitweb.cgi;
+    fastcgi_param PATH_INFO         $uri;
+    fastcgi_param GITWEB_CONFIG     /etc/gitweb.conf;
+    include fastcgi_params;
+ }
+}
+</code></pre></div> <p>修改 <code class="highlighter-rouge">/etc/gitweb.conf</code> 为 <code class="highlighter-rouge">$projectroot = "/usr/share/nginx/git.mindy.tk";</code></p> <p>使用<code class="highlighter-rouge">htpasswd</code>创建用户名及其密码. <code class="highlighter-rouge"> htpasswd /etc/nginx/passwd user1 </code></p> <h1 id="section">建立与本地仓库的连接</h1> <p>服务器上建立裸仓库 <code class="highlighter-rouge">git init --bare test.git</code></p> <p>注意检查一下 test.git 的权限， 如果权限不足的话， 使用这个命令设置一下权限:<br /> <code class="highlighter-rouge">chmod a+rw -R test.git</code></p> <p>设置<code class="highlighter-rouge">Hook</code><br /> <a href="https://www.digitalocean.com/community/tutorials/how-to-deploy-jekyll-blogs-with-git">How To Deploy Jekyll Blogs with Git</a> <a href="http://jekyllrb.com/docs/deployment-methods/">Deployment methods</a> <code class="highlighter-rouge"> cd hooks vi post-receive </code> 加入 ``` #!/bin/bash -l GIT_REPO=$HOME/repos/awesomeblog.git TMP_GIT_CLONE=$HOME/tmp/git/awesomeblog PUBLIC_WWW=/var/www/awesomeblog</p> <p>git clone $GIT_REPO $TMP_GIT_CLONE jekyll build –source $TMP_GIT_CLONE –destination $PUBLIC_WWW rm -Rf $TMP_GIT_CLONE exit ``` <code class="highlighter-rouge">chmod +x post-receive</code></p> <h1 id="enjoy">Enjoy</h1> </article> <div class="post-share"> <div class="container"> <a href="https://twitter.com/share?url=http://yourdomain.com/%E6%8A%80%E6%9C%AF/2016/05/04/jekyll_nginx_on_VPS.html&text=VPS上搭建 jekyll + nginx 博客" target="_blank" class="post-share-icon twitter"></a> <a href="https://www.evernote.com/clip.action?url=http://yourdomain.com/%E6%8A%80%E6%9C%AF/2016/05/04/jekyll_nginx_on_VPS.html&title=VPS上搭建 jekyll + nginx 博客" target="_blank" class="post-share-icon evernote"></a> <a href="http://service.weibo.com/share/share.php?url=http://yourdomain.com/%E6%8A%80%E6%9C%AF/2016/05/04/jekyll_nginx_on_VPS.html&title=VPS上搭建 jekyll + nginx 博客" target="_blank" class="post-share-icon weibo"></a> </div> </div> <div class="footer"> <div class="container"> <p class="footer-entry">All content is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA</a></p> <p class="footer-entry">Buit with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and <a href="https://github.com/P233/3-Jekyll" target="_blank">3-Jekyll theme</a> • Hosted on <a href="https://pages.github.com/" target="_blank">Github</a></p> </div> </div> </main> <button id="menu"> <span id="menu-icons"></span> </button> <script src="/assets/js/jquery-2.1.3.min.js"></script> <script src="/assets/js/jquery.pjax.js"></script> <script src="/assets/js/nprogress.js"></script> <script src="/assets/js/main.js"></script> </body> </html>
