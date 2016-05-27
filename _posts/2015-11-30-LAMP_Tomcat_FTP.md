@@ -1,15 +1,13 @@
 ---
 layout: post
-title: Ubuntu的LAMP+Tomcat+FTP安装
+title: Ubuntu 的 LAMP Tomcat FTP 安装和配置
 category: 技术
-tags:
-keywords:
-description:
 ---
+没有解决 Tomcat 间歇性挂掉的问题.
 
-~~连续折腾了三天LAMP+TOMCAT，主要问题是TOMECAT间歇性挂掉。不知道问题出在哪。~~
-日志里是这样的：
-```
+日志里是这样的:
+
+```shell
 SEVERE: The web application [/app] registered the JDBC driver [com.mysql.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
 
 Dec 02, 2015 3:52:50 AM org.apache.catalina.loader.WebappClassLoader clearReferencesThreads

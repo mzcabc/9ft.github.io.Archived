@@ -1,52 +1,70 @@
 ---
 layout: post
-title: VPS上搭建 jekyll + nginx 博客
+title: VPS 上利用 Jekyll Nginx 搭建博客
 category: 技术
-tags:
-keywords:
-description:
 ---
 
-买个版瓦工VPS，想着把个人博客迁移过去，发现安装mysql时出错，简单的查一下，好像是因为内存不足。好吧，那就不折腾LEMP了，干脆装一个jekyll好啦。
+以前买的虚拟空间虽然很稳定, 但自己能控制的东西不多. 折腾VPS, 把个人博客迁移过去. 换个胃口, 先不折腾 `LEMP` 了, 装个 `Jekyll` 好啦.
 
-# 安装 Ruby
-这里使用`RVM`安装，参照[Installing RVM][1]
+# 安装 `Ruby`
 
-> Before any other step install mpapis public key (might need gpg2) (see security)  
-`gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3`
+使用 `RVM` 安装, 参照 [Installing RVM][1]
 
-> Install RVM (development version):  
-`\curl -sSL https://get.rvm.io | bash`
+> Before any other step install mpapis public key (might need gpg2) (see security)
+```shell
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+```
 
-> Display a list of all known rubies.  
-`rvm list known`
+> Install RVM (development version):
 
-> Install a version of Ruby (eg 2.2)  
-`rvm install 2.2`
+```shell
+\curl -sSL https://get.rvm.io | bash
+```
+
+> Display a list of all known rubies.
+
+```shell
+rvm list known
+```
+
+> Install a version of Ruby (eg 2.2)
+
+```shell
+rvm install 2.2
+```
 
 > Check this worked correctly
-`ruby -v`
 
-# 安装 Jekyll
+```shell
+ruby -v
+```
+
+# 安装 `Jekyll`
 参照 [Jekyll Quick-start Instructions][2].
 
-```bash
+```shell
 gem install jekyll
 jekyll new my-awesome-site
 cd my-awesome-site
 ```
 
-# 部署 Jekyll 生成的网站
-```
+# 部署 `Jekyll` 生成的网站
+
+```shell
 jekyll build --source ~/my-awesome-site --destination /var/www/awesomeblog
 ```
 
-# 配置 Nginx
+# 配置 `Nginx`
+
 复制默认配置文件  
-`sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/example.com`
+
+```shell
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/example.com
+```
 
 参照 [How To Get Started with Jekyll on an Ubuntu VPS][3] 在 `example.com` 中写一个最简单的配置文件:
-```
+
+```conf
 server {
   listen 80;
   # the domain of your VPS
@@ -58,20 +76,38 @@ server {
 ```
 
 Using symlinks means it's easy to take a site offline by removing the symlink without touching the original configuration file.  
-`sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/example.com`
 
-Tests the nginx configuration.  
-`sudo nginx -t`
+```shell
+sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/example.com
+```
 
-Restart nginx.  
-`sudo service nginx restart`
+Tests the nginx configuration.
+
+```shell
+sudo nginx -t
+```
+
+Restart nginx.
+
+```shell
+sudo service nginx restart
+```
 
 # 架设 `HTTP` 协议的 `Git` 服务器
-安装 `sudo apt-get install git gitweb fcgiwrap`.
+
+## 安装
+
+```shell
+sudo apt-get install git gitweb fcgiwrap
+```
+
+## 配置
+
+### 配置 `Nginx` 可运行 `fastcgi`
 
 参照 [在 Ubuntu 系统上配置 Nginx Git 服务器][4] 和 [NGINX Configuration for Gitweb and git-http-backend][5] 中的配置.
 
-```
+```conf
 # HTTP server
 server {
   listen 80;
@@ -128,28 +164,49 @@ server {
  }
 }
 ```
-修改 `/etc/gitweb.conf` 为 `$projectroot = "/usr/share/nginx/git.mindy.tk";`
 
-使用`htpasswd`创建用户名及其密码.
+### 配置 `gitweb.conf`
+
+修改 `/etc/gitweb.conf` 为:
+
+```conf
+$projectroot = "/usr/share/nginx/git.mindy.tk"
 ```
+
+### 使用 `htpasswd` 创建用户
+
+使用 `htpasswd` 创建用户名及其密码.
+
+```shell
 htpasswd /etc/nginx/passwd user1
 ```
 
 # 建立与本地仓库的连接
-服务器上建立裸仓库
-`git init --bare test.git`
 
-注意检查一下 test.git 的权限， 如果权限不足的话， 使用这个命令设置一下权限:  
-`chmod a+rw -R test.git`
+## 服务器上建立裸仓库
 
-设置`Hook`  
-[How To Deploy Jekyll Blogs with Git][6]  [Deployment methods][7]
+```shell
+git init --bare test.git
 ```
+
+注意检查一下 `test.git` 的权限, 如果权限不足的话, 使用命令设置一下权限:
+
+```shell
+chmod a+rw -R test.git
+```
+
+## 设置`Hook`
+
+参照 [How To Deploy Jekyll Blogs with Git][6]  [Deployment methods][7]
+
+```shell
 cd hooks
 vi post-receive
 ```
-加入
-```
+
+加入:
+
+```conf
 #!/bin/bash -l
 GIT_REPO=$HOME/repos/awesomeblog.git
 TMP_GIT_CLONE=$HOME/tmp/git/awesomeblog
@@ -160,7 +217,10 @@ jekyll build --source $TMP_GIT_CLONE --destination $PUBLIC_WWW
 rm -Rf $TMP_GIT_CLONE
 exit
 ```
-`chmod +x post-receive`
+
+```shell
+chmod +x post-receive
+```
 
 # Enjoy
 

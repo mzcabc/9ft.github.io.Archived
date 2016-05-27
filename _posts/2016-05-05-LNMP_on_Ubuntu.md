@@ -2,32 +2,32 @@
 layout: post
 title: Ubuntu 下安装 LNMP
 category: 技术
-tags:
-keywords:
-description:
 ---
 
 # 安装 `LAMP`
-咦？我们要安装 `LNMP`, 为什么要安装 `LAMP` 呢, 因为Ubuntu安装 `LAMP` 超级方便. 要其中的 `MP`.
 
-```bash
+咦？我们要安装 `LNMP`, 为什么要安装 `LAMP` 呢, 因为 `Ubuntu` 安装 `LAMP` 超级方便. 要其中的 `MP (MySQL, PHP)`.
+
+```shell
 sudo apt-get install lamp-server^
 ```
 
 `php5-fpm` 和 `php5-mcrypt` 必须安装. 没安装上的话要手动安装. 其中:
-- `php5-fpm` 是 FastCGI Process Manager，是 Nginx 配合 PHP 所必须使用的.
-- `php5-mcrypt` 是 phpMyAdmin 需要使用到的.
+
+- `php5-fpm` 是 `FastCGI Process Manager`, 是 `Nginx` 配合 `PHP` 所必须使用的.
+- `php5-mcrypt` 是 `phpMyAdmin` 需要使用到的.
 
 # 安装配置 `Nginx`
 
 ## 安装
-```bash
+```shell
 sudo apt-get install nginx
 ```
 ## 配置
 
 ### 部署 `HTML`
-```javascript
+
+```conf
 server {
   listen 80;
   listen [::]:80;
@@ -42,7 +42,8 @@ server {
 ```
 
 ### 部署 `PHP`
-```javascript
+
+```conf
 server {
   listen 80;
   listen [::]:80;
@@ -65,21 +66,26 @@ server {
   }
 }
 ```
+
 `PHP` 可以通过写个探针测试配置是否正确
+
 ```php
 <?php phpinfo(); ?>
 ```
 
-# 安装配置 `phpmyadmin`
+# 安装配置 `phpMyAdmin`
 
 ## 安装
-```bash
+
+```shell
 sudo apt-get install phpmyadmin
 ```
 
 ## 配置
-仿照上一节`部署 PHP`中为 `phpmyadmin` 设置访问入口.
-```javascript
+
+仿照上一节 `部署 PHP` 中为 `phpmyadmin` 设置访问入口.
+
+```conf
 server {
   listen 80;
   listen [::]:80;
@@ -102,14 +108,19 @@ server {
 }
 ```
 
-## 缺少 `mcrypt` 扩展。请检查 `PHP` 配置
+## 问题: 缺少 `mcrypt` 扩展, 请检查 `PHP` 配置
 
-如果出现`缺少 mcrypt 扩展。请检查 PHP 配置。`的提示.
+如果出现 `缺少 mcrypt 扩展. 请检查 PHP 配置.` 的提示.
 
-执行 `sudo apt-get install php5-mcrypt`  
-配置`php.ini`，加上`extension=php_mcrypt.so`, 修改结果:
+执行
 
-```
+```shell
+sudo apt-get install php5-mcrypt
+```  
+
+配置 `php.ini`, 加上 `extension=php_mcrypt.so`, 修改结果:
+
+```conf
 ;;;;;;;;;;;;;;;;;;;;;;
 ; Dynamic Extensions ;
 ;;;;;;;;;;;;;;;;;;;;;;
@@ -118,3 +129,5 @@ server {
 
 extension=php_mcrypt.so
 ```
+
+# Enjoy!
