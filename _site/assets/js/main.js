@@ -14,6 +14,12 @@ $(function() {
 
     // discus comment.
     
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//mindytech' + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
 
     // your scripts
   };
@@ -40,6 +46,9 @@ $(function() {
       NProgress.done();
       main.scrollTop(0).addClass('fadeIn');
       menu.add(sidebar).removeClass('open');
+      
+      ga('set', 'location', window.location.href);
+      ga('send', 'pageview');
       
     }
   });
