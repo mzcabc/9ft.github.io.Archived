@@ -6,7 +6,7 @@ category: 技术
 ---
 最近在用 `VS2013` 跑程序, 经常出现一个错误. 而且看起来是个无厘头的错误.
 
-//TODO 图待补充
+![Error](/assets/img/post/2016-05-30-vs-error-remote-local-1.jpg "Error")
 
 错误内容:  
 `无法启动程序 远程调试器拒绝了连接请求. 请确保远程调试器在"Windows 身份验证"模式下运行.`
