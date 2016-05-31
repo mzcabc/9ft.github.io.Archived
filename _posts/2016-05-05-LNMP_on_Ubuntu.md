@@ -20,9 +20,11 @@ sudo apt-get install lamp-server^
 # 安装配置 `Nginx`
 
 ## 安装
+
 ```shell
 sudo apt-get install nginx
 ```
+
 ## 配置
 
 ### 部署 `HTML`

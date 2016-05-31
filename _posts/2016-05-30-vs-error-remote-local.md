@@ -29,7 +29,7 @@ category: 技术
 
 对比一下 MSDN 的中英文档就会发现, 中文的说明太少了, 然而中文资料基本没有, 所以光查中文没法解决这个问题.
 
-英文页面: https://msdn.microsoft.com/en-us/library/0773txhx.aspx
+英文页面: https://msdn.microsoft.com/en-us/library/0773txhx.aspx  
 中文页面: https://msdn.microsoft.com/zh-cn/library/0773txhx.aspx
 
 [Unable to Connect to the Microsoft Visual Studio Remote Debugging Monitor]:https://msdn.microsoft.com/en-us/library/0773txhx.aspx

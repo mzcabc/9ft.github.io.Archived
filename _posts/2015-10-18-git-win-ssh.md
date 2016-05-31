@@ -3,7 +3,7 @@ layout: post
 title: Windows 下使用 Git 的配置
 category: 技术
 ---
-`Windows` 下Git客户端我用的是 [`PortableGit`][Releases · msysgit/msysgit], 只要将 `PortableGit\bin` 丢进环境变量里就可以在命令行里用了.
+`Windows` 下 Git 客户端我用的是 [`PortableGit`][Releases · msysgit/msysgit], 只要将 `PortableGit\bin` 丢进环境变量里就可以在命令行里用了.
 
 
 

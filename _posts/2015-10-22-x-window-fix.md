@@ -3,7 +3,7 @@ layout: post
 title: Linux 不能进入 x window
 category: 技术
 ---
-老师给我分配一个 `GPU` 工作站, 刚开机好像我把`/etc/X11/xorg.conf`搞坏了, 导致不能进入x window, 可把我急坏了, 按照[这里][1]的步骤做下来就好, 发现自己太菜了, 记录下来.
+老师给我分配一个 `GPU` 工作站, 刚开机好像我把 `/etc/X11/xorg.conf` 搞坏了, 导致不能进入 x window, 可把我急坏了, 按照[这里][1]的步骤做下来就好, 发现自己太菜了, 记录下来.
 
 解决方法就是重新生成一个 `/etc/X11/xorg.conf` 文件.
 

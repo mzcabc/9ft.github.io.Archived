@@ -3,7 +3,7 @@ layout: post
 title: Ubuntu 的 LAMP Tomcat FTP 安装和配置
 category: 技术
 ---
-没有解决 Tomcat 间歇性挂掉的问题.
+搭建好多遍, 都没有解决 Tomcat 间歇性挂掉的问题.
 
 日志里是这样的:
 

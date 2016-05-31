@@ -18,7 +18,6 @@ CUDA Version: `cuda_7.5.18_linux`
 确保:
 
 - `/usr/local/cuda-7.5` 在 `PATH` 中
-
 - `/usr/local/cuda-7.5/lib64` 在 `LD_LIBRARY_PATH` 中, 或在 `/etc/ld.so.conf` 中加入 `/usr/local/cuda-7.5/lib64` 并运行 `ldconfig` 使之生效.
 
 使用 `nvcc` 命令测试是否设置成功.
