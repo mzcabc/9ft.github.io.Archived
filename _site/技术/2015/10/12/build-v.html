@@ -1,39 +1,163 @@
-<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /> <!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/ie.html"><![endif]--> <title>v_p_n 架设</title> <meta name="description" content="###架构&gt;- 使用 Openswan 作为 IPsec 服务器;&gt;- 使用 xl2tpd 提供 L2TP 支持;&gt;- 使用 ppp 提供用户认证"> <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600|Droid+Sans+Mono' rel='stylesheet' type='text/css'> <link rel="stylesheet" href="/css/main.css"> <link rel="canonical" href="http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/12/build-v.html"> <link rel="alternate" type="application/rss+xml" title="TechLog" href="http://yourdomain.com/feed.xml" /> <script src="/assets/js/prefixfree.js"></script> </head> <body> <aside id="sidebar"> <div id="sidebar-left"> <a id="sidebar-avatar" href="/"> <img id="sidebar-avatar-img" alt="" src="/assets/img/avatar.jpg"/> </a> <div id="sidebar-social"> <a href="/feed.xml" class="sidebar-social-icon feed"></a> <a href="mailto:mindycong@gmail.com" class="sidebar-social-icon email"></a> </div> <ul id="sidebar-tags"> <li class="sidebar-tag active" data-filter="all">全部文章</li> <li class="sidebar-tag" data-filter="技术">技术</li> </ul> </div> <div id="sidebar-right"> <div id="search-box"> <input id="search-input" type="text" placeholder="Search" /> </div> <nav id="toc"> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2016/05/06/HEXO.html"> HEXO </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2016/05/05/LNMP_on_Ubuntu.html"> Ubuntu 下安装 LNMP </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2016/05/04/jekyll_nginx_on_VPS.html"> VPS上搭建 jekyll + nginx 博客 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/11/30/LAMP_Tomcat_FTP.html"> Ubuntu的LAMP+Tomcat+FTP安装 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/24/whow-to-run-cuda.html"> 运行第一个Cuda程序 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/22/x-window-fix.html"> Linux不能进入x window </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/18/git-win-ssh.html"> Windows下使用Git的配置 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/17/sublime-config.html"> sublime 配置 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/14/ubuntu-installation.html"> Ubuntu 配置 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/12/build-v.html"> v_p_n 架设 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/12/build-ss.html"> ss搭建 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/11/Hello-World.html"> First Post </a> </nav> </div> </aside> <main id="main"> <article class="post container"> <div class="post-meta"> <span class="post-meta-span date">2015 October 12</span> </div> <h1 class="post-title">v_p_n 架设</h1> <p>###架构 &gt;- 使用 Openswan 作为 IPsec 服务器; &gt;- 使用 xl2tpd 提供 L2TP 支持; &gt;- 使用 ppp 提供用户认证</p> <p>###环境 &gt;- Linode &gt;- Ubuntu 14.04 64bit</p> <p>###架设步骤 <code class="highlighter-rouge"> sudo apt-get install openswan xl2tpd ppp lsof # 安装软件包，会有设置向导，全部 Enter 使用默认设置 </code></p> <p>##配置 ###防火墙 iptables 和 sysctl 的设置 ``` sudo iptables -t nat -A POSTROUTING -j SNAT –to-source %SERVERIP% -o eth+ #%SERVERIP% 替换成你的服务器 IP；eth+ 通配符</p> <table> <tbody> <tr> <td>echo “net.ipv4.ip_forward = 1”</td> <td>tee -a /etc/sysctl.conf</td> </tr> <tr> <td>echo “net.ipv4.conf.all.accept_redirects = 0”</td> <td>tee -a /etc/sysctl.conf</td> </tr> <tr> <td>echo “net.ipv4.conf.all.send_redirects = 0”</td> <td>tee -a /etc/sysctl.conf</td> </tr> <tr> <td>echo “net.ipv4.conf.default.rp_filter = 0”</td> <td>tee -a /etc/sysctl.conf</td> </tr> <tr> <td>echo “net.ipv4.conf.default.accept_source_route = 0”</td> <td>tee -a /etc/sysctl.conf</td> </tr> <tr> <td>echo “net.ipv4.conf.default.send_redirects = 0”</td> <td>tee -a /etc/sysctl.conf</td> </tr> <tr> <td>echo “net.ipv4.icmp_ignore_bogus_error_responses = 1”</td> <td>tee -a /etc/sysctl.conf</td> </tr> </tbody> </table> <p>for vpn in /proc/sys/net/ipv4/conf/*; do echo 0 &gt; $vpn/accept_redirects; echo 0 &gt; $vpn/send_redirects; done</p> <p>sysctl -p #应用设置 ```</p> <p>###添加自启 在<code class="highlighter-rouge">rc.local</code>中添加： <code class="highlighter-rouge"> for vpn in /proc/sys/net/ipv4/conf/*; do echo 0 &gt; $vpn/accept_redirects; echo 0 &amp;gt; $vpn/send_redirects; done iptables -t nat -A POSTROUTING -j SNAT --to-source %SERVERIP% -o eth+ </code></p> <p>###配置 Openswan (IPSEC) 在<code class="highlighter-rouge">/etc/ipsec.conf</code>中： 修改为<code class="highlighter-rouge">left=%SERVERIP%</code>、<code class="highlighter-rouge">protostack=netkey</code>。 <code class="highlighter-rouge">/etc/ipsec.conf</code>完整文件： ``` version 2.0 # conforms to second version of ipsec.conf specification</p> <h1 id="basic-configuration">basic configuration</h1> <p>config setup # Do not set debug options to debug configuration issues! # plutodebug / klipsdebug = “all”, “none” or a combation from below: # “raw crypt parsing emitting control klips pfkey natt x509 dpd private” # eg: # plutodebug=”control parsing” # Again: only enable plutodebug or klipsdebug when asked by a developer # # enable to get logs per-peer # plutoopts=”–perpeerlog” # # Enable core dumps (might require system changes, like ulimit -C) # This is required for abrtd to work properly # Note: incorrect SElinux policies might prevent pluto writing the core dumpdir=/var/run/pluto/ # # NAT-TRAVERSAL support, see README.NAT-Traversal nat_traversal=yes # exclude networks used on server side by adding %v4:!a.b.c.0/24 # It seems that T-Mobile in the US and Rogers/Fido in Canada are # using 25/8 as “private” address space on their 3G network. # This range has not been announced via BGP (at least upto 2010-12-21) virtual_private=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12,%v4:25.0.0.0/8,%v6:fd00::/8,%v6:fe80::/10 # OE is now off by default. Uncomment and change to on, to enable. oe=off # which IPsec stack to use. auto will try netkey, then klips then mast protostack=netkey # Use this to log to a file, or disable logging on embedded systems (like openwrt) #plutostderrlog=/dev/null</p> <h1 id="add-connections-here">Add connections here</h1> <h1 id="sample-vpn-connection">sample VPN connection</h1> <p># for more examples, see /etc/ipsec.d/examples/ #conn sample # # Left security gateway, subnet behind it, nexthop toward right. # left=10.0.0.1 # leftsubnet=172.16.0.0/24 # leftnexthop=10.22.33.44 # # Right security gateway, subnet behind it, nexthop toward left. # right=10.12.12.1 # rightsubnet=192.168.0.0/24 # rightnexthop=10.101.102.103 # # To authorize this connection, but not actually start it, # # at startup, uncomment this. # #auto=add conn L2TP-PSK-noNAT authby=secret #shared secret. Use rsasig for certificates.</p> <div class="highlighter-rouge"><pre class="highlight"><code>pfs=no
-#Disable pfs
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /> <!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/ie.html"><![endif]--> <title>v_p_n 架设</title> <meta name="description" content="搭建V_P_N."> <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600|Droid+Sans+Mono' rel='stylesheet' type='text/css'> <link rel="stylesheet" href="/assets/icon/style.css"> <link rel="stylesheet" href="/css/main.css"> <link rel="canonical" href="http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/12/build-v.html"> <link rel="alternate" type="application/rss+xml" title="Tech Log" href="http://yourdomain.com/feed.xml" /> <script src="/assets/js/prefixfree.js"></script> </head> <body> <aside id="sidebar"> <div id="sidebar-left"> <a id="sidebar-avatar" href="/"> <img id="sidebar-avatar-img" alt="" src="/assets/img/avatar.jpg"/> </a> <div id="sidebar-social"> <a href="/feed.xml" class="sidebar-social-icon feed"></a> <a href="mailto:mindycong@gmail.com" class="sidebar-social-icon email"></a> </div> <ul id="sidebar-tags"> <li class="sidebar-tag active" data-filter="all">全部文章</li> <li class="sidebar-tag" data-filter="技术">技术</li> </ul> </div> <div id="sidebar-right"> <div id="search-box"> <input id="search-input" type="text" placeholder="Search" /> </div> <nav id="toc"> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2016/05/30/vs-error-remote-local.html"> VS 错误: 本地调试时出现远程调试器错误 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2016/05/06/HEXO.html"> HEXO </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2016/05/05/LNMP_on_Ubuntu.html"> Ubuntu 下安装 LNMP </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2016/05/04/jekyll_nginx_on_VPS.html"> VPS 上利用 Jekyll Nginx 搭建博客 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/11/30/LAMP_Tomcat_FTP.html"> Ubuntu 的 LAMP Tomcat FTP 安装和配置 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/24/whow-to-run-cuda.html"> 运行第一个 Cuda 程序 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/22/x-window-fix.html"> Linux 不能进入 x window </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/18/git-win-ssh.html"> Windows 下使用 Git 的配置 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/17/sublime-config.html"> Sublime 配置 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/14/ubuntu-installation.html"> Ubuntu 配置 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/12/build-v.html"> v_p_n 架设 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/12/build-ss.html"> SS搭建 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2006/12/31/Hello-World.html"> First Post </a> </nav> </div> </aside> <main id="main"> <article class="post container"> <div class="post-meta"> <span class="post-meta-span date">2015 October 12</span> </div> <h1 class="post-title">v_p_n 架设</h1> <p>搭建V_P_N.</p> <h1 id="section">架构</h1> <ul> <li>使用 <code class="highlighter-rouge">Openswan</code> 作为 <code class="highlighter-rouge">IPsec</code> 服务器.</li> <li>使用 <code class="highlighter-rouge">xl2tpd</code> 提供 <code class="highlighter-rouge">L2TP</code> 支持.</li> <li>使用 <code class="highlighter-rouge">ppp</code> 提供用户认证.</li> </ul> <h1 id="section-1">环境</h1> <ul> <li>Linode</li> <li>Ubuntu 14.04 64-bit</li> </ul> <h1 id="section-2">安装</h1> <div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo apt-get install openswan xl2tpd ppp lsof
+<span class="c"># 安装软件包, 会有设置向导, 全部 Enter 使用默认设置.</span>
+</code></pre></div> <h1 id="section-3">配置</h1> <h2 id="iptables--sysctl-">防火墙 <code class="highlighter-rouge">iptables</code> 和 <code class="highlighter-rouge">sysctl</code> 的设置</h2> <div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo iptables -t nat -A POSTROUTING -j SNAT --to-source %SERVERIP% -o eth+
+<span class="c">#%SERVERIP% 替换成你的服务器 IP; eth+ 通配符</span>
 
-auto=add
-#the ipsec tunnel should be started and routes created when the ipsec daemon itself starts.
+<span class="nb">echo</span> <span class="s2">"net.ipv4.ip_forward = 1"</span> |  tee -a /etc/sysctl.conf
+<span class="nb">echo</span> <span class="s2">"net.ipv4.conf.all.accept_redirects = 0"</span> |  tee -a /etc/sysctl.conf
+<span class="nb">echo</span> <span class="s2">"net.ipv4.conf.all.send_redirects = 0"</span> |  tee -a /etc/sysctl.conf
+<span class="nb">echo</span> <span class="s2">"net.ipv4.conf.default.rp_filter = 0"</span> |  tee -a /etc/sysctl.conf
+<span class="nb">echo</span> <span class="s2">"net.ipv4.conf.default.accept_source_route = 0"</span> |  tee -a /etc/sysctl.conf
+<span class="nb">echo</span> <span class="s2">"net.ipv4.conf.default.send_redirects = 0"</span> |  tee -a /etc/sysctl.conf
+<span class="nb">echo</span> <span class="s2">"net.ipv4.icmp_ignore_bogus_error_responses = 1"</span> |  tee -a /etc/sysctl.conf
 
-keyingtries=3
-#Only negotiate a conn. 3 times.
+<span class="k">for </span>vpn <span class="k">in</span> /proc/sys/net/ipv4/conf/<span class="k">*</span>; <span class="k">do </span><span class="nb">echo </span>0 &gt; <span class="nv">$vpn</span>/accept_redirects; <span class="nb">echo </span>0 &gt; <span class="nv">$vpn</span>/send_redirects; <span class="k">done
 
-ikelifetime=8h
-keylife=1h
+</span>sysctl -p
+<span class="c"># 应用设置</span>
+</code></pre></div> <h2 id="section-4">添加自启</h2> <p>在 <code class="highlighter-rouge">rc.local</code> 中添加:</p> <div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="n">for</span> <span class="n">vpn</span> <span class="n">in</span> /<span class="n">proc</span>/<span class="n">sys</span>/<span class="n">net</span>/<span class="n">ipv4</span>/<span class="n">conf</span>/*; <span class="n">do</span> <span class="n">echo</span> <span class="m">0</span> &gt; $<span class="n">vpn</span>/<span class="n">accept_redirects</span>; <span class="n">echo</span> <span class="m">0</span> &amp;<span class="n">gt</span>; $<span class="n">vpn</span>/<span class="n">send_redirects</span>; <span class="n">done</span>
+<span class="n">iptables</span> -<span class="n">t</span> <span class="n">nat</span> -<span class="n">A</span> <span class="n">POSTROUTING</span> -<span class="n">j</span> <span class="n">SNAT</span> --<span class="n">to</span>-<span class="n">source</span> %<span class="n">SERVERIP</span>% -<span class="n">o</span> <span class="n">eth</span>+
+</code></pre></div> <h2 id="openswan-ipsec">配置 <code class="highlighter-rouge">Openswan (IPSEC)</code></h2> <h3 id="ipsecconf">配置 <code class="highlighter-rouge">ipsec.conf</code></h3> <p>在 <code class="highlighter-rouge">/etc/ipsec.conf</code> 中修改:</p> <div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="n">left</span>=%<span class="n">SERVERIP</span>%
+<span class="n">protostack</span>=<span class="n">netkey</span>
+</code></pre></div> <p>附 <code class="highlighter-rouge">/etc/ipsec.conf</code> 完整文件:</p> <div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="n">version</span> <span class="m">2</span>.<span class="m">0</span> <span class="c"># conforms to second version of ipsec.conf specification
+</span>
+<span class="c"># basic configuration
+</span><span class="n">config</span> <span class="n">setup</span>
+    <span class="c"># Do not set debug options to debug configuration issues!
+</span>    <span class="c"># plutodebug / klipsdebug = "all", "none" or a combation from below:
+</span>    <span class="c"># "raw crypt parsing emitting control klips pfkey natt x509 dpd private"
+</span>    <span class="c"># eg:
+</span>    <span class="c"># plutodebug="control parsing"
+</span>    <span class="c"># Again: only enable plutodebug or klipsdebug when asked by a developer
+</span>    <span class="c">#
+</span>    <span class="c"># enable to get logs per-peer
+</span>    <span class="c"># plutoopts="--perpeerlog"
+</span>    <span class="c">#
+</span>    <span class="c"># Enable core dumps (might require system changes, like ulimit -C)
+</span>    <span class="c"># This is required for abrtd to work properly
+</span>    <span class="c"># Note: incorrect SElinux policies might prevent pluto writing the core
+</span>    <span class="n">dumpdir</span>=/<span class="n">var</span>/<span class="n">run</span>/<span class="n">pluto</span>/
+    <span class="c">#
+</span>    <span class="c"># NAT-TRAVERSAL support, see README.NAT-Traversal
+</span>    <span class="n">nat_traversal</span>=<span class="n">yes</span>
+    <span class="c"># exclude networks used on server side by adding %v4:!a.b.c.0/24
+</span>    <span class="c"># It seems that T-Mobile in the US and Rogers/Fido in Canada are
+</span>    <span class="c"># using 25/8 as "private" address space on their 3G network.
+</span>    <span class="c"># This range has not been announced via BGP (at least upto 2010-12-21)
+</span>    <span class="n">virtual_private</span>=%<span class="n">v4</span>:<span class="m">10</span>.<span class="m">0</span>.<span class="m">0</span>.<span class="m">0</span>/<span class="m">8</span>,%<span class="n">v4</span>:<span class="m">192</span>.<span class="m">168</span>.<span class="m">0</span>.<span class="m">0</span>/<span class="m">16</span>,%<span class="n">v4</span>:<span class="m">172</span>.<span class="m">16</span>.<span class="m">0</span>.<span class="m">0</span>/<span class="m">12</span>,%<span class="n">v4</span>:<span class="m">25</span>.<span class="m">0</span>.<span class="m">0</span>.<span class="m">0</span>/<span class="m">8</span>,%<span class="n">v6</span>:<span class="n">fd00</span>::/<span class="m">8</span>,%<span class="n">v6</span>:<span class="n">fe80</span>::/<span class="m">10</span>
+    <span class="c"># OE is now off by default. Uncomment and change to on, to enable.
+</span>    <span class="n">oe</span>=<span class="n">off</span>
+    <span class="c"># which IPsec stack t                 o use. auto will try netkey, then klips then mast
+</span>    <span class="n">protostack</span>=<span class="n">netkey</span>
+    <span class="c"># Use this to log to a file, or disable logging on embedded systems (like openwrt)
+</span>    <span class="c">#plutostderrlog=/dev/null
+</span>
+<span class="c"># Add connections here
+</span>
+<span class="c"># sample VPN connection
+# for more examples, see /etc/ipsec.d/examples/
+#conn sample
+#       # Left security gateway, subnet behind it, nexthop toward right.
+#       left=10.0.0.1
+#       leftsubnet=172.16.0.0/24
+#       leftnexthop=10.22.33.44
+#       # Right security gateway, subnet behind it, nexthop toward left.
+#       right=10.12.12.1
+#       rightsubnet=192.168.0.0/24
+#       rightnexthop=10.101.102.103
+#       # To authorize this connection, but not actually start it,
+#       # at startup, uncomment this.
+#       #auto=add
+</span><span class="n">conn</span> <span class="n">L2TP</span>-<span class="n">PSK</span>-<span class="n">noNAT</span>
+    <span class="n">authby</span>=<span class="n">secret</span>
+    <span class="c">#shared secret. Use rsasig for certificates.
+</span>
+    <span class="n">pfs</span>=<span class="n">no</span>
+    <span class="c">#Disable pfs
+</span>
+    <span class="n">auto</span>=<span class="n">add</span>
+    <span class="c">#the ipsec tunnel should be started and routes created when the ipsec daemon itself starts.
+</span>
+    <span class="n">keyingtries</span>=<span class="m">3</span>
+    <span class="c">#Only negotiate a conn. 3 times.
+</span>
+    <span class="n">ikelifetime</span>=<span class="m">8</span><span class="n">h</span>
+    <span class="n">keylife</span>=<span class="m">1</span><span class="n">h</span>
 
-ike=aes256-sha1;modp1024!
-phase2alg=aes256-sha1;modp1024
-# specifies the phase 1 encryption scheme, the hashing algorithm, and the diffie-hellman group. The modp1024 is for Diffie-Hellman 2. Why 'modp' instead of dh? DH2 is a 1028 bit encryption algorithm that modulo's a prime number, e.g. modp1028. See RFC 5114 for details or the wiki page on diffie hellmann, if interested.
+    <span class="n">ike</span>=<span class="n">aes256</span>-<span class="n">sha1</span>;<span class="n">modp1024</span>!
+    <span class="n">phase2alg</span>=<span class="n">aes256</span>-<span class="n">sha1</span>;<span class="n">modp1024</span>
+    <span class="c"># specifies the phase 1 encryption scheme, the hashing algorithm, and the diffie-hellman group. The modp1024 is for Diffie-Hellman 2. Why 'modp' instead of dh? DH2 is a 1028 bit encryption algorithm that modulo's a prime number, e.g. modp1028. See RFC 5114 for details or the wiki page on diffie hellmann, if interested.
+</span>
+    <span class="n">type</span>=<span class="n">transport</span>
+    <span class="c">#because we use l2tp as tunnel protocol
+</span>
+    <span class="n">left</span>=%<span class="n">SERVERIP</span>%
+    <span class="c">#fill in server IP above
+</span>
+    <span class="n">leftprotoport</span>=<span class="m">17</span>/<span class="m">1701</span>
+    <span class="n">right</span>=%<span class="n">any</span>
+    <span class="n">rightprotoport</span>=<span class="m">17</span>/%<span class="n">any</span>
 
-type=transport
-#because we use l2tp as tunnel protocol
+    <span class="n">dpddelay</span>=<span class="m">10</span>
+    <span class="c"># Dead Peer Dectection (RFC 3706) keepalives delay
+</span>    <span class="n">dpdtimeout</span>=<span class="m">20</span>
+    <span class="c">#  length of time (in seconds) we will idle without hearing either an R_U_THERE poll from our peer, or an R_U_THERE_ACK reply.
+</span>    <span class="n">dpdaction</span>=<span class="n">clear</span>
+    <span class="c"># When a DPD enabled peer is declared dead, what action should be taken. clear means the eroute and SA with both be cleared.
+</span></code></pre></div> <h3 id="ipsecsecrets">修改 <code class="highlighter-rouge">ipsec.secrets</code></h3> <ul> <li>获取服务器 IP:</li> </ul> <div class="language-shell highlighter-rouge"><pre class="highlight"><code>curl http://ip.mtak.nl
+</code></pre></div> <ul> <li>生成随机密匙:</li> </ul> <div class="language-shell highlighter-rouge"><pre class="highlight"><code>openssl rand -hex 30
+</code></pre></div> <h3 id="ipsec--shared-secret"><code class="highlighter-rouge">IPSec</code> 握手时的 <code class="highlighter-rouge">Shared Secret</code></h3> <p><code class="highlighter-rouge">/etc/ipsec.secrets</code> 修改为:</p> <div class="language-conf highlighter-rouge"><pre class="highlight"><code>%<span class="n">SERVERIP</span>%  %<span class="n">any</span>:   <span class="n">PSK</span> <span class="s2">"%Shared Secret%"</span>
+</code></pre></div> <h3 id="ipsec">验证 <code class="highlighter-rouge">IPSec</code></h3> <p>验证 <code class="highlighter-rouge">IPSec</code> 是否正常工作</p> <div class="language-shell highlighter-rouge"><pre class="highlight"><code>ipsec verify
+</code></pre></div> <h3 id="section-5">遇到问题</h3> <h4 id="netkey-testing-xfrm-related-proc-values--failed">问题1 <code class="highlighter-rouge">NETKEY: Testing XFRM related proc values [FAILED]</code></h4> <p><code class="highlighter-rouge">NETKEY: Testing XFRM related proc values [FAILED]</code></p> <p>应该是忘记修改网络策略, 解决方法:</p> <div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="k">for </span>each <span class="k">in</span> /proc/sys/net/ipv4/conf/<span class="k">*</span>
+<span class="k">do
+    </span><span class="nb">echo </span>0 &gt; <span class="nv">$each</span>/accept_redirects
+    <span class="nb">echo </span>0 &gt; <span class="nv">$each</span>/send_redirects
+<span class="k">done</span>
+</code></pre></div> <h4 id="hardware-rng-detected-testing-if-used-properly--failed">问题2 <code class="highlighter-rouge">Hardware RNG detected, testing if used properly [FAILED]</code></h4> <p><code class="highlighter-rouge">Hardware RNG detected, testing if used properly [FAILED]</code></p> <p>解决方法:</p> <div class="highlighter-rouge"><pre class="highlight"><code>sudo apt-get install rng-tools
+</code></pre></div> <p>再次验证 <code class="highlighter-rouge">IPSec</code> 是否正常工作, <code class="highlighter-rouge">ipsec verify</code>, 已经正常.</p> <h2 id="xl2tpd">配置 <code class="highlighter-rouge">xl2tpd</code></h2> <h3 id="xl2tpdconf">配置 <code class="highlighter-rouge">xl2tpd.conf</code></h3> <p><code class="highlighter-rouge">/etc/xl2tpd/xl2tpd.conf</code> 修改成:</p> <div class="language-conf highlighter-rouge"><pre class="highlight"><code>[<span class="n">global</span>]
+<span class="n">ipsec</span> <span class="n">saref</span> = <span class="n">yes</span>
+<span class="n">saref</span> <span class="n">refinfo</span> = <span class="m">30</span>
 
-left=%SERVERIP%
-#fill in server IP above
+;<span class="n">debug</span> <span class="n">avp</span> = <span class="n">yes</span>
+;<span class="n">debug</span> <span class="n">network</span> = <span class="n">yes</span>
+;<span class="n">debug</span> <span class="n">state</span> = <span class="n">yes</span>
+;<span class="n">debug</span> <span class="n">tunnel</span> = <span class="n">yes</span>
 
-leftprotoport=17/1701
-right=%any
-rightprotoport=17/%any
-
-dpddelay=10
-# Dead Peer Dectection (RFC 3706) keepalives delay
-dpdtimeout=20
-#  length of time (in seconds) we will idle without hearing either an R_U_THERE poll from our peer, or an R_U_THERE_ACK reply.
-dpdaction=clear
-# When a DPD enabled peer is declared dead, what action should be taken. clear means the eroute and SA with both be cleared. ```
-</code></pre></div> <p>修改 ipsec.secrets &gt;- 获取服务器 IP: <code class="highlighter-rouge">curl http://ip.mtak.nl</code> &gt;- 生成随机密匙: <code class="highlighter-rouge">openssl rand -hex 30</code></p> <p>设置IPSec握手时的的 Shared Secret,<code class="highlighter-rouge">/etc/ipsec.secrets</code>修改为 <code class="highlighter-rouge"> %SERVERIP% %any: PSK "%Shared Secret%" </code></p> <p>验证 IPSEC 是否正常工作 <code class="highlighter-rouge">ipsec verify</code></p> <p>遇到的问题 &gt;- <code class="highlighter-rouge">NETKEY: Testing XFRM related proc values [FAILED]</code>应该是忘记修改网络策略,解决方法</p> <div class="highlighter-rouge"><pre class="highlight"><code>for each in /proc/sys/net/ipv4/conf/*
-do
-    echo 0 &gt; $each/accept_redirects
-    echo 0 &gt; $each/send_redirects
-done
-</code></pre></div> <blockquote> <ul> <li><code class="highlighter-rouge">Hardware RNG detected, testing if used properly [FAILED]</code> 解决方法</li> </ul> </blockquote> <div class="highlighter-rouge"><pre class="highlight"><code>sudo apt-get install rng-tools
-</code></pre></div> <p>再次验证 IPSEC <code class="highlighter-rouge">ipsec verify</code>，终于正常。</p> <p>###配置 xl2tpd</p> <p><code class="highlighter-rouge">/etc/xl2tpd/xl2tpd.conf</code>修改成： ``` [global] ipsec saref = yes saref refinfo = 30</p> <p>;debug avp = yes ;debug network = yes ;debug state = yes ;debug tunnel = yes</p> <p>[lns default] ip range = 172.16.1.30-172.16.1.100 local ip = 172.16.1.1 refuse pap = yes require authentication = yes ;ppp debug = yes pppoptfile = /etc/ppp/options.xl2tpd length bit = yes ```</p> <p>###用户认证 编辑<code class="highlighter-rouge">/etc/xl2tpd/xl2tpd.conf</code> <code class="highlighter-rouge"> # 增加这一行： unix authentication = yes # 删除这一行 refuse pap = yes </code> 更改<code class="highlighter-rouge">/etc/pam.d/ppp</code>成: <code class="highlighter-rouge"> auth required pam_nologin.so auth required pam_unix.so account required pam_unix.so session required pam_unix.so </code> 修改 <code class="highlighter-rouge">/etc/ppp/options.xl2tpd</code> <code class="highlighter-rouge"> login ms-dns 8.8.8.8 ms-dns 8.8.4.4 auth mtu 1200 mru 1000 crtscts hide-password modem name l2tpd proxyarp lcp-echo-interval 30 lcp-echo-failure 4 </code></p> <p>##使用 ###增加用户 修改<code class="highlighter-rouge">/etc/ppp/chap-secrets</code> <code class="highlighter-rouge"> # Secrets for authentication using CHAP # client server secret IP addresses user1 l2tpd pass1 * user2 l2tpd pass2 * </code> ###重启服务 <code class="highlighter-rouge"> /etc/init.d/ipsec restart /etc/init.d/xl2tpd restart </code> ###查看错误日志 <code class="highlighter-rouge"> /var/log/syslog /var/log/auth.log </code></p> <p>[1] http://phyng.com/digitalocean-ubuntu-vpn.html [2] http://blog.fengqijun.me/vpn/2015/03/08/l2tp-ipsec-vpn-on-ubuntu-14/</p> </article> <div class="post-share"> <div class="container"> <a href="https://twitter.com/share?url=http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/12/build-v.html&text=v_p_n 架设" target="_blank" class="post-share-icon twitter"></a> <a href="https://www.evernote.com/clip.action?url=http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/12/build-v.html&title=v_p_n 架设" target="_blank" class="post-share-icon evernote"></a> <a href="http://service.weibo.com/share/share.php?url=http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/12/build-v.html&title=v_p_n 架设" target="_blank" class="post-share-icon weibo"></a> </div> </div> <div class="comment container"> <div id="disqus_thread"> <a href=""></a> </div> </div> <div class="footer"> <div class="container"> <p class="footer-entry">©2016 ♥ Mindy</p> <p class="footer-entry">Buit with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> • Hosted on <a href="https://pages.github.com/" target="_blank">Github</a></p> </div> </div> </main> <button id="menu"> <span id="menu-icons"></span> </button> <script src="/assets/js/jquery-2.1.3.min.js"></script> <script src="/assets/js/jquery.pjax.js"></script> <script src="/assets/js/nprogress.js"></script> <script src="/assets/js/main.js"></script> <script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-46567212-3', 'auto'); ga('send', 'pageview'); </script> </body> </html>
+[<span class="n">lns</span> <span class="n">default</span>]
+<span class="n">ip</span> <span class="n">range</span> = <span class="m">172</span>.<span class="m">16</span>.<span class="m">1</span>.<span class="m">30</span>-<span class="m">172</span>.<span class="m">16</span>.<span class="m">1</span>.<span class="m">100</span>
+<span class="n">local</span> <span class="n">ip</span> = <span class="m">172</span>.<span class="m">16</span>.<span class="m">1</span>.<span class="m">1</span>
+<span class="n">refuse</span> <span class="n">pap</span> = <span class="n">yes</span>
+<span class="n">require</span> <span class="n">authentication</span> = <span class="n">yes</span>
+;<span class="n">ppp</span> <span class="n">debug</span> = <span class="n">yes</span>
+<span class="n">pppoptfile</span> = /<span class="n">etc</span>/<span class="n">ppp</span>/<span class="n">options</span>.<span class="n">xl2tpd</span>
+<span class="n">length</span> <span class="n">bit</span> = <span class="n">yes</span>
+</code></pre></div> <h3 id="section-6">用户认证</h3> <p>编辑 <code class="highlighter-rouge">/etc/xl2tpd/xl2tpd.conf</code>:</p> <div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="c"># 增加这一行:
+</span><span class="n">unix</span> <span class="n">authentication</span> = <span class="n">yes</span>
+<span class="c"># 删除这一行:
+</span><span class="n">refuse</span> <span class="n">pap</span> = <span class="n">yes</span>
+</code></pre></div> <p>更改 <code class="highlighter-rouge">/etc/pam.d/ppp</code> 成:</p> <div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="n">auth</span>    <span class="n">required</span>        <span class="n">pam_nologin</span>.<span class="n">so</span>
+<span class="n">auth</span>    <span class="n">required</span>        <span class="n">pam_unix</span>.<span class="n">so</span>
+<span class="n">account</span> <span class="n">required</span>        <span class="n">pam_unix</span>.<span class="n">so</span>
+<span class="n">session</span> <span class="n">required</span>        <span class="n">pam_unix</span>.<span class="n">so</span>
+</code></pre></div> <p>修改 <code class="highlighter-rouge">/etc/ppp/options.xl2tpd</code>:</p> <div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="n">login</span>
+<span class="n">ms</span>-<span class="n">dns</span> <span class="m">8</span>.<span class="m">8</span>.<span class="m">8</span>.<span class="m">8</span>
+<span class="n">ms</span>-<span class="n">dns</span> <span class="m">8</span>.<span class="m">8</span>.<span class="m">4</span>.<span class="m">4</span>
+<span class="n">auth</span>
+<span class="n">mtu</span> <span class="m">1200</span>
+<span class="n">mru</span> <span class="m">1000</span>
+<span class="n">crtscts</span>
+<span class="n">hide</span>-<span class="n">password</span>
+<span class="n">modem</span>
+<span class="n">name</span> <span class="n">l2tpd</span>
+<span class="n">proxyarp</span>
+<span class="n">lcp</span>-<span class="n">echo</span>-<span class="n">interval</span> <span class="m">30</span>
+<span class="n">lcp</span>-<span class="n">echo</span>-<span class="n">failure</span> <span class="m">4</span>
+</code></pre></div> <h1 id="section-7">使用</h1> <h2 id="section-8">增加用户</h2> <p>修改 <code class="highlighter-rouge">/etc/ppp/chap-secrets</code>:</p> <div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="c"># Secrets for authentication using CHAP
+# client       server  secret                  IP addresses
+</span><span class="n">user1</span>          <span class="n">l2tpd</span>   <span class="n">pass1</span>                        *
+<span class="n">user2</span>          <span class="n">l2tpd</span>   <span class="n">pass2</span>                        *
+</code></pre></div> <h2 id="section-9">重启服务</h2> <div class="language-shell highlighter-rouge"><pre class="highlight"><code>/etc/init.d/ipsec restart
+/etc/init.d/xl2tpd restart
+</code></pre></div> <h2 id="section-10">查看错误日志</h2> <div class="language-shell highlighter-rouge"><pre class="highlight"><code>cat /var/log/syslog
+cat /var/log/auth.log
+</code></pre></div> <h1 id="enjoy">Enjoy!</h1> </article> <div class="post-share"> <div class="container"> <a href="https://twitter.com/share?url=http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/12/build-v.html&text=v_p_n 架设" target="_blank" class="post-share-icon twitter"></a> <a href="https://www.evernote.com/clip.action?url=http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/12/build-v.html&title=v_p_n 架设" target="_blank" class="post-share-icon evernote"></a> <a href="http://service.weibo.com/share/share.php?url=http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/12/build-v.html&title=v_p_n 架设" target="_blank" class="post-share-icon weibo"></a> </div> </div> <div class="comment container"> <div id="disqus_thread"> <a href=""></a> </div> </div> <div class="footer"> <div class="container"> <p class="footer-entry">©2016 <span class="icon-heart3"></span> Mindy</p> <p class="footer-entry">Buit with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> • Hosted on <a href="https://pages.github.com/" target="_blank">Github</a></p> </div> </div> </main> <button id="menu"> <span id="menu-icons"></span> </button> <script src="/assets/js/jquery-2.1.3.min.js"></script> <script src="/assets/js/jquery.pjax.js"></script> <script src="/assets/js/nprogress.js"></script> <script src="/assets/js/main.js"></script> <script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-46567212-3', 'auto'); ga('send', 'pageview'); </script> </body> </html>
