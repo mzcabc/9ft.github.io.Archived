@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://yourdomain.com/%25E6%258A%2580%25E6%259C%25AF/2016/05/31/VS2015-CUDA.html</loc>
+<lastmod>2016-05-31T05:24:50+00:00</lastmod>
+</url>
+<url>
 <loc>http://yourdomain.com/%25E6%258A%2580%25E6%259C%25AF/2016/05/30/vs-error-remote-local.html</loc>
 <lastmod>2016-05-30T13:27:20+00:00</lastmod>
 </url>

@@ -6,9 +6,59 @@
 </description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 31 May 2016 04:21:43 +0000</pubDate>
-    <lastBuildDate>Tue, 31 May 2016 04:21:43 +0000</lastBuildDate>
+    <pubDate>Tue, 31 May 2016 12:42:16 +0000</pubDate>
+    <lastBuildDate>Tue, 31 May 2016 12:42:16 +0000</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>让 VS2015 运行 CUDA 程序</title>
+        <description>&lt;p&gt;虽然 &lt;code class=&quot;highlighter-rouge&quot;&gt;Nsight&lt;/code&gt; 支持 &lt;code class=&quot;highlighter-rouge&quot;&gt;Visual Studio 2015&lt;/code&gt; 了, 但 &lt;code class=&quot;highlighter-rouge&quot;&gt;CUDA&lt;/code&gt; 貌似还不能在 &lt;code class=&quot;highlighter-rouge&quot;&gt;VS2015&lt;/code&gt; 下运行. 运行已有的 &lt;code class=&quot;highlighter-rouge&quot;&gt;VS2013&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;CUDA&lt;/code&gt; 程序会提示 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;Import&amp;gt;&lt;/code&gt; 中声明的路径错误. 而且新建项目中并没有建立 CUDA 程序的选项.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://b.mindy.tk/assets/img/post/2016-05-31-VS2015-CUDA-1.png&quot; alt=&quot;Error&quot; title=&quot;Error&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;对比文件夹&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\BuildCustomizations&lt;/code&gt;&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\BuildCustomizations&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;//TODO 加入配图&lt;/p&gt;
+
+&lt;p&gt;发现缺少如下几个文件:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CUDA 7.5.props&lt;/li&gt;
+  &lt;li&gt;CUDA 7.5.targets&lt;/li&gt;
+  &lt;li&gt;CUDA 7.5.xml&lt;/li&gt;
+  &lt;li&gt;msbldver.dll&lt;/li&gt;
+  &lt;li&gt;Nvda.Build.CudaTasks.v7.5.dll&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;将以上文件全部复制到 &lt;code class=&quot;highlighter-rouge&quot;&gt;C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\BuildCustomizations&lt;/code&gt;, 再次运行已有的 &lt;code class=&quot;highlighter-rouge&quot;&gt;CUDA&lt;/code&gt; 程序.&lt;/p&gt;
+
+&lt;p&gt;会有如下提示:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;table&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;The Visual Studio 2015 platform toolset is not currently supported.  Please change the Platform Toolset property in the VC++ project properties under Configuration Properties&lt;/td&gt;
+        &lt;td&gt;General.&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;提示说的很明白, 在项目属性中将 &lt;code class=&quot;highlighter-rouge&quot;&gt;平台工具集: Visual Studio 2015 (v140)&lt;/code&gt; 改成 &lt;code class=&quot;highlighter-rouge&quot;&gt;Visual Studio 2013 (v120)&lt;/code&gt; 即可.&lt;/p&gt;
+
+&lt;p&gt;运行已有的 &lt;code class=&quot;highlighter-rouge&quot;&gt;CUDA&lt;/code&gt; 程序, 成功.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 31 May 2016 05:24:50 +0000</pubDate>
+        <link>http://yourdomain.com/%E6%8A%80%E6%9C%AF/2016/05/31/VS2015-CUDA.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/%E6%8A%80%E6%9C%AF/2016/05/31/VS2015-CUDA.html</guid>
+        
+        
+        <category>技术</category>
+        
+      </item>
     
       <item>
         <title>VS 错误: 本地调试时出现远程调试器错误</title>
@@ -604,83 +654,6 @@ SEVERE: The web application &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;/app] 
         <pubDate>Sat, 17 Oct 2015 00:00:00 +0000</pubDate>
         <link>http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/17/sublime-config.html</link>
         <guid isPermaLink="true">http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/17/sublime-config.html</guid>
-        
-        
-        <category>技术</category>
-        
-      </item>
-    
-      <item>
-        <title>Ubuntu 配置</title>
-        <description>&lt;p&gt;虽然 &lt;code class=&quot;highlighter-rouge&quot;&gt;Linux&lt;/code&gt; 不太会用, 可是比较喜欢装系统. 本文记录 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ubuntu&lt;/code&gt; 下自己用的配置和软件包, 方便装系统后快速折腾.&lt;/p&gt;
-
-&lt;h1 id=&quot;open-vm-tools&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;open-vm-tools&lt;/code&gt;&lt;/h1&gt;
-
-&lt;p&gt;虚拟机下安装必不可少, 在装 &lt;code class=&quot;highlighter-rouge&quot;&gt;VMware Tools&lt;/code&gt; 时, 官方推荐用 &lt;code class=&quot;highlighter-rouge&quot;&gt;open-vm-tools&lt;/code&gt; , 听官方的.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt-get install open-vm-tools
-&lt;span class=&quot;c&quot;&gt;# vm-tools 安装&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;这里有点没搞懂, 我的系统是 Ubuntu 14.04LTS, 总共装了四个包才搞定, 使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;dpkg -l | grep open-vm&lt;/code&gt; 查看安装的包, 应该有多余的, 不知道哪个是多余的.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;mindy@dog:~$ &lt;/span&gt;dpkg -l|grep open-vm
-ii  open-vm-toolbox-lts-trusty  2:9.4.0-1280544-5ubuntu6.2  all Open VMware Tools &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;virtual machines hosted on VMware &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;transitional package&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-ii  open-vm-tools-desktop2:9.4.0-1280544-5ubuntu6.2 amd64   Open VMware Tools &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;virtual machines hosted on VMware &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;CLI&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-ii  open-vm-tools-desktop   2:9.4.0-1280544-5ubuntu6.2  amd64   Open VMware Tools &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;virtual machines hosted on VMware &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;GUI&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-ii  open-vm-tools-lts-trusty    2:9.4.0-1280544-5ubuntu6.2  all Open VMware Tools &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;virtual machines hosted on VMware &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;transitional package&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;section&quot;&gt;修改时区&lt;/h1&gt;
-
-&lt;p&gt;运行 &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo dpkg-reconfigure tzdata&lt;/code&gt; 选择时区.&lt;/p&gt;
-
-&lt;h1 id=&quot;section-1&quot;&gt;语言&lt;/h1&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;终端界面改为中文提示&lt;/h2&gt;
-
-&lt;p&gt;在 &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/environment&lt;/code&gt; 中加入:&lt;/p&gt;
-
-&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;LANG&lt;/span&gt;=&lt;span class=&quot;s2&quot;&gt;&quot;zh_CN.UTF-8&quot;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;LANGUAGE&lt;/span&gt;=&lt;span class=&quot;s2&quot;&gt;&quot;zh_CN:zh:en_US:en&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;运行 &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo dpkg-reconfigure locales&lt;/code&gt;, 重启生效.&lt;/p&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;个人目录下文件夹名称改为英文&lt;/h2&gt;
-
-&lt;p&gt;中文系统下, 终端中有中文目录会十分蛋疼.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US
-xdg-user-dirs-gtk-update
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;据我观察 &lt;code class=&quot;highlighter-rouge&quot;&gt;xdg-user-dirs-gtk-update&lt;/code&gt; 命令是在 &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.config/user-dirs.dirs&lt;/code&gt; 中写入了配置.&lt;/p&gt;
-
-&lt;h1 id=&quot;section-4&quot;&gt;搜狗输入法&lt;/h1&gt;
-
-&lt;p&gt;以前用的 ibus 的谷歌拼音很棒, 不过貌似不怎么维护, 用搜狗!&lt;/p&gt;
-
-&lt;p&gt;官网下载 &lt;code class=&quot;highlighter-rouge&quot;&gt;.deb&lt;/code&gt; 包, 安装后更改输入法 &lt;code class=&quot;highlighter-rouge&quot;&gt;ibus&lt;/code&gt; 为 &lt;code class=&quot;highlighter-rouge&quot;&gt;fcitx&lt;/code&gt;, 重启即可.&lt;/p&gt;
-
-&lt;p&gt;杂项:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;tree&lt;/li&gt;
-  &lt;li&gt;sl&lt;/li&gt;
-  &lt;li&gt;zsh&lt;/li&gt;
-  &lt;li&gt;https://github.com/robbyrussell/oh-my-zsh&lt;/li&gt;
-  &lt;li&gt;vim&lt;/li&gt;
-  &lt;li&gt;git&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Wed, 14 Oct 2015 00:00:00 +0000</pubDate>
-        <link>http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/14/ubuntu-installation.html</link>
-        <guid isPermaLink="true">http://yourdomain.com/%E6%8A%80%E6%9C%AF/2015/10/14/ubuntu-installation.html</guid>
         
         
         <category>技术</category>
