@@ -49,6 +49,14 @@ jekyll new my-awesome-site
 cd my-awesome-site
 ```
 
+# 启动服务器
+
+使用浏览器在本地进行预览.
+
+```shell
+jekyll serve
+```
+
 # 部署 `Jekyll` 生成的网站
 
 ```shell
