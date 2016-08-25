@@ -1,11 +1,19 @@
 ---
 layout: post
 title: Ubuntu 配置
+date: 2015-10-14 00:00:00 +0800
+update_date: 2016-08-25 14:09:29 +0800
 category: 技术
 ---
 虽然 `Linux` 不太会用, 可是比较喜欢装系统. 本文记录 `Ubuntu` 下自己用的配置和软件包, 方便装系统后快速折腾.
 
-# `open-vm-tools`
+# 虚拟机下使用额外功能
+
+比如拖拽, 共享文件, 改变窗口大小.
+
+## Win 下 vmware
+
+`open-vm-tools`
 
 虚拟机下安装必不可少, 在装 `VMware Tools` 时, 官方推荐用 `open-vm-tools` , 听官方的.
 
@@ -23,6 +31,10 @@ ii  open-vm-tools-desktop2:9.4.0-1280544-5ubuntu6.2 amd64   Open VMware Tools fo
 ii  open-vm-tools-desktop   2:9.4.0-1280544-5ubuntu6.2  amd64   Open VMware Tools for virtual machines hosted on VMware (GUI)
 ii  open-vm-tools-lts-trusty    2:9.4.0-1280544-5ubuntu6.2  all Open VMware Tools for virtual machines hosted on VMware (transitional package)
 ```
+
+## Mac 下 Parallels
+
+可以自动安装
 
 # 修改时区
 
