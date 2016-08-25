@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Ubuntu 下更改 hostname
-date:
+date: 2016-08-25 15:27:49 +0800
 category: 技术
 ---
 有个同学在搞 Spark 要改主机名. 以前没关注过这个东西, 所以不知道怎么改.
@@ -13,9 +13,9 @@ category: 技术
 输入命令 `man hostname` 里面有说
 
 > **SET NAME**
-
+>
 > When  called  with one argument or with the --file option, the commands       set the host name  or  the  NIS/YP  domain  name.   hostname  uses  the       sethostname(2)  function,  while all of the three domainname, ypdomain‐       name and nisdomainname use setdomainname(2).  Note, that this is effec‐       tive  only  until  the  next  reboot.  **Edit /etc/hostname for permanent       change.**
-
+>
 > Note, that only the super-user can change the names.
 
 **桌面系统更改 hostname**
