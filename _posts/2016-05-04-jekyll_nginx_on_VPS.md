@@ -6,7 +6,10 @@ category: 技术
 
 以前买的虚拟空间虽然很稳定, 但自己能控制的东西不多. 折腾VPS, 把个人博客迁移过去. 换个胃口, 先不折腾 `LEMP` 了, 装个 `Jekyll` 好啦.
 
+
 # 安装 `Ruby`
+
+Mac 下也推荐使用 RVM, 虽然 macOS 自带了 Ruby, 但这个 Ruby 是为系统所使用的, 安装 gem 需要使用 sudo. 否则没有对目录 /Library/Ruby/Gems/ 的写权限.
 
 使用 `RVM` 安装, 参照 [Installing RVM][1]
 
