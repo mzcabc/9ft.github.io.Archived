@@ -7,7 +7,7 @@ category: 技术
 Windows 平台下有微软现成的软件.
 macOS 下也不能放过 Bing 精选的壁纸.
 
-无意中看到一个[`使用 Shell 实现的代码`](Mac OS X自动下载切换桌面壁纸), 但实际上不能使用.
+无意中看到一个[`使用 Shell 实现的代码`][Mac OS X自动下载切换桌面壁纸], 但实际上不能使用.
 
 基于上面链接的方法, 复习一下 Shell 编程和正则表达式, 自己修改的代码如下:
 
@@ -56,7 +56,7 @@ Using **curl** to transfer data.
 
 > Anchored pattern match of regular expression *REGEXP* in *STRING*. [Source](Linux and Unix expr command)
 
-Regex can test on: [regex101.com](Regex101)
+Regex can test on: [regex101.com][Regex101]
 
 **`\(.*\)`**
 
@@ -72,7 +72,7 @@ Got `imgurl` = `BlackchurchRock_ZH-CN9991716795_1920x1080.jpg`
 
 **crontab** [**-u** **user**] { **-l** | **-r** | **-e** }
 
-[Example of job definition:](What are the runtime permissions of a cron job?)
+[Example of job definition:][What are the runtime permissions of a cron job?]
 
 ```shell
 # Example of job definition:
