@@ -18,12 +18,13 @@ filter: 'category'
 
 
 # Social account
-social: false
+social: true
 # twitter:  username
 # weibo:    ID
 # github:   username
 # codepen:  username
 # dribbble: username
+blog: canukiss.me
 
 
 # Comment
