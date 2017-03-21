@@ -1,12 +1,9 @@
 # Site settings
 title: Tech Log
 email: mindycong@gmail.com
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+# description:
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://b.mindy.tk" # the base hostname & protocol for your site
+url: "http://b.mindy.tk"
 
 permalink: :title
 timezone: Asia/Shanghai
@@ -21,9 +18,10 @@ filter: 'category'
 social: true
 # twitter:  username
 # weibo:    ID
-github:   9ft
+github: 9ft
 # codepen:  username
 # dribbble: username
+git: git.mindy.tk
 blog: canukiss.me
 
 
