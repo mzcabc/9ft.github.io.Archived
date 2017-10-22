@@ -2,7 +2,7 @@
 layout: post
 title: Ubuntu 配置
 date: 2015-10-14 00:00:00 +0800
-update_date: 2016-08-25 14:09:29 +0800
+update_date: 2017-06-01 11:54:40 +0800
 category: 技术
 ---
 虽然 `Linux` 不太会用, 可是比较喜欢装系统. 本文记录 `Ubuntu` 下自己用的配置和软件包, 方便装系统后快速折腾.
@@ -63,6 +63,12 @@ xdg-user-dirs-gtk-update
 ```
 
 据我观察 `xdg-user-dirs-gtk-update` 命令是在 `~/.config/user-dirs.dirs` 中写入了配置.
+
+另一种办法, 需要手动移动文件.
+
+```shell
+LANG=C xdg-user-dirs-update --force
+```
 
 # 搜狗输入法
 
