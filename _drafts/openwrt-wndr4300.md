@@ -39,27 +39,30 @@ opkg install luci-i18n-base-zh-cn
 
 # 使用
 
-## 安装必要的软件包
+参照 [https://cokebar.info/archives/664](https://cokebar.info/archives/664) 安装软件包并设置.
 
-(你懂的...可能是安装 LEDE 最实用的功能)
+~~安装必要的软件包~~
 
-已经有人将软件包整合好了 [`OpenWrt-dist`](http://openwrt-dist.sourceforge.net).
+~~(你懂的...可能是安装 LEDE 最实用的功能)~~
 
-如果可以直连互联网
+~~已经有人将软件包整合好了 [`OpenWrt-dist`](http://openwrt-dist.sourceforge.net).~~
 
-`/etc/opkg.conf` 中, 添加源:
-```
-src/gz openwrt_dist http://openwrt-dist.sourceforge.net/packages/LEDE/base/ar71xx
-src/gz openwrt_dist_luci http://openwrt-dist.sourceforge.net/packages/LEDE/luci
-```
+~~如果可以直连互联网~~
 
-并安装
+~~`/etc/opkg.conf` 中, 添加源:~~
 
-```
-opkg update
-opkg install *
-```
+~~```~~
+~~src/gz openwrt_dist http://openwrt-dist.sourceforge.net/packages/LEDE/base/ar71xx~~
+~~src/gz openwrt_dist_luci http://openwrt-dist.sourceforge.net/packages/LEDE/luci~~
+~~```~~
 
-如果不能直连互联网, 在 `http://openwrt-dist.sourceforge.net/packages/LEDE/` 手动下载安装.
+~~并安装~~
 
-或者参照 [https://cokebar.info/archives/664](https://cokebar.info/archives/664) 设置.
+~~```~~
+~~opkg update~~
+~~opkg install *~~
+~~```~~
+
+~~如果不能直连互联网, 在 `http://openwrt-dist.sourceforge.net/packages/LEDE/` 手动下载安装.~~
+
+~~或者~~
