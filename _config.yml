@@ -4,6 +4,7 @@ email: mindycong@gmail.com
 # description:
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://b.mindy.tk"
+blog_git_path: "https://github.com/9ft/9ft.github.io"
 
 permalink: :title
 timezone: Asia/Shanghai
