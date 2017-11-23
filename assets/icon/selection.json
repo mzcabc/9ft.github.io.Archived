@@ -23,8 +23,8 @@
         "code": 57364,
         "name": "date"
       },
-      "setIdx": 14,
-      "setId": 10,
+      "setIdx": 0,
+      "setId": 29,
       "iconIdx": 0
     },
     {
@@ -49,8 +49,8 @@
         "code": 57398,
         "name": "search"
       },
-      "setIdx": 14,
-      "setId": 10,
+      "setIdx": 0,
+      "setId": 29,
       "iconIdx": 1
     },
     {
@@ -75,8 +75,8 @@
         "code": 57462,
         "name": "comment"
       },
-      "setIdx": 14,
-      "setId": 10,
+      "setIdx": 0,
+      "setId": 29,
       "iconIdx": 2
     },
     {
@@ -101,8 +101,8 @@
         "code": 57477,
         "name": "tag"
       },
-      "setIdx": 14,
-      "setId": 10,
+      "setIdx": 0,
+      "setId": 29,
       "iconIdx": 3
     },
     {
@@ -127,8 +127,8 @@
         "code": 57492,
         "name": "left"
       },
-      "setIdx": 14,
-      "setId": 10,
+      "setIdx": 0,
+      "setId": 29,
       "iconIdx": 4
     },
     {
@@ -153,8 +153,8 @@
         "code": 57493,
         "name": "right"
       },
-      "setIdx": 14,
-      "setId": 10,
+      "setIdx": 0,
+      "setId": 29,
       "iconIdx": 5
     },
     {
@@ -180,8 +180,8 @@
         "code": 58820,
         "name": "arrow_back"
       },
-      "setIdx": 14,
-      "setId": 10,
+      "setIdx": 0,
+      "setId": 29,
       "iconIdx": 6
     },
     {
@@ -207,8 +207,8 @@
         "code": 58829,
         "name": "close"
       },
-      "setIdx": 14,
-      "setId": 10,
+      "setIdx": 0,
+      "setId": 29,
       "iconIdx": 7
     },
     {
@@ -234,8 +234,8 @@
         "code": 58834,
         "name": "menu"
       },
-      "setIdx": 14,
-      "setId": 10,
+      "setIdx": 0,
+      "setId": 29,
       "iconIdx": 8
     },
     {
@@ -258,14 +258,14 @@
       ],
       "properties": {
         "order": 1,
-        "id": 1,
+        "id": 9,
         "prevSize": 24,
         "code": 59648,
         "name": "github2"
       },
-      "setIdx": 18,
-      "setId": 6,
-      "iconIdx": 0
+      "setIdx": 0,
+      "setId": 29,
+      "iconIdx": 9
     },
     {
       "icon": {
@@ -288,8 +288,8 @@
         "code": 58880,
         "name": "bullet"
       },
-      "setIdx": 15,
-      "setId": 9,
+      "setIdx": 1,
+      "setId": 28,
       "iconIdx": 0
     },
     {
@@ -313,8 +313,8 @@
         "code": 58881,
         "name": "quote"
       },
-      "setIdx": 15,
-      "setId": 9,
+      "setIdx": 1,
+      "setId": 28,
       "iconIdx": 1
     },
     {
@@ -345,8 +345,8 @@
         "code": 58883,
         "name": "evernote"
       },
-      "setIdx": 15,
-      "setId": 9,
+      "setIdx": 1,
+      "setId": 28,
       "iconIdx": 2
     },
     {
@@ -370,8 +370,8 @@
         "code": 58882,
         "name": "weibo"
       },
-      "setIdx": 15,
-      "setId": 9,
+      "setIdx": 1,
+      "setId": 28,
       "iconIdx": 3
     },
     {
@@ -404,8 +404,8 @@
         "ligatures": "mail5, contact5",
         "name": "mail"
       },
-      "setIdx": 16,
-      "setId": 8,
+      "setIdx": 2,
+      "setId": 27,
       "iconIdx": 0
     },
     {
@@ -434,8 +434,8 @@
         "ligatures": "twitter, brand11",
         "name": "twitter-share"
       },
-      "setIdx": 16,
-      "setId": 8,
+      "setIdx": 2,
+      "setId": 27,
       "iconIdx": 1
     },
     {
@@ -463,8 +463,8 @@
         "ligatures": "twitter3, brand13",
         "name": "twitter"
       },
-      "setIdx": 16,
-      "setId": 8,
+      "setIdx": 2,
+      "setId": 27,
       "iconIdx": 2
     },
     {
@@ -492,8 +492,8 @@
         "ligatures": "feed4, rss3",
         "name": "feed"
       },
-      "setIdx": 16,
-      "setId": 8,
+      "setIdx": 2,
+      "setId": 27,
       "iconIdx": 3
     },
     {
@@ -521,8 +521,8 @@
         "ligatures": "dribbble3, brand31",
         "name": "dribbble"
       },
-      "setIdx": 16,
-      "setId": 8,
+      "setIdx": 2,
+      "setId": 27,
       "iconIdx": 4
     },
     {
@@ -551,8 +551,8 @@
         "ligatures": "github, brand40",
         "name": "github"
       },
-      "setIdx": 16,
-      "setId": 8,
+      "setIdx": 2,
+      "setId": 27,
       "iconIdx": 5
     },
     {
@@ -579,16 +579,19 @@
         "ligatures": "codepen, brand81",
         "name": "codepen"
       },
-      "setIdx": 16,
-      "setId": 8,
+      "setIdx": 2,
+      "setId": 27,
       "iconIdx": 6
     },
     {
       "icon": {
-        "width": 1088,
         "paths": [
           "M640 64c247.424 0 448 200.576 448 448s-200.576 448-448 448v-96c94.024 0 182.418-36.614 248.902-103.098s103.098-154.878 103.098-248.902c0-94.022-36.614-182.418-103.098-248.902s-154.878-103.098-248.902-103.098c-94.022 0-182.418 36.614-248.902 103.098-51.14 51.138-84.582 115.246-97.306 184.902h186.208l-224 256-224-256h164.57c31.060-217.102 217.738-384 443.43-384zM832 448v128h-256v-320h128v192z"
         ],
+        "width": 1088,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
         "tags": [
           "history",
           "time",
@@ -596,21 +599,46 @@
           "past"
         ],
         "defaultCode": 59725,
-        "grid": 16,
-        "attrs": []
+        "grid": 16
       },
       "attrs": [],
       "properties": {
         "ligatures": "history, time",
         "name": "history",
         "order": 33,
-        "id": 78,
+        "id": 7,
         "prevSize": 24,
         "code": 59725
       },
-      "setIdx": 23,
+      "setIdx": 2,
+      "setId": 27,
+      "iconIdx": 7
+    },
+    {
+      "icon": {
+        "paths": [
+          "M1004.692 466.394l-447.096-447.080c-25.738-25.754-67.496-25.754-93.268 0l-103.882 103.876 78.17 78.17c12.532-5.996 26.564-9.36 41.384-9.36 53.020 0 96 42.98 96 96 0 14.82-3.364 28.854-9.362 41.386l127.976 127.974c12.532-5.996 26.566-9.36 41.386-9.36 53.020 0 96 42.98 96 96s-42.98 96-96 96-96-42.98-96-96c0-14.82 3.364-28.854 9.362-41.386l-127.976-127.974c-3.042 1.456-6.176 2.742-9.384 3.876v266.968c37.282 13.182 64 48.718 64 90.516 0 53.020-42.98 96-96 96s-96-42.98-96-96c0-41.796 26.718-77.334 64-90.516v-266.968c-37.282-13.18-64-48.72-64-90.516 0-14.82 3.364-28.852 9.36-41.384l-78.17-78.17-295.892 295.876c-25.75 25.776-25.75 67.534 0 93.288l447.12 447.080c25.738 25.75 67.484 25.75 93.268 0l445.006-445.006c25.758-25.762 25.758-67.54-0.002-93.29z"
+        ],
+        "tags": [
+          "git",
+          "brand"
+        ],
+        "defaultCode": 60135,
+        "grid": 16,
+        "attrs": []
+      },
+      "attrs": [],
+      "properties": {
+        "ligatures": "git, brand80",
+        "name": "git",
+        "order": 34,
+        "id": 488,
+        "prevSize": 24,
+        "code": 60135
+      },
+      "setIdx": 27,
       "setId": 1,
-      "iconIdx": 77
+      "iconIdx": 487
     },
     {
       "icon": {
@@ -633,8 +661,8 @@
         "code": 59649,
         "name": "heart3"
       },
-      "setIdx": 17,
-      "setId": 7,
+      "setIdx": 3,
+      "setId": 26,
       "iconIdx": 0
     }
   ],
@@ -681,6 +709,7 @@
     },
     "historySize": 100,
     "showCodes": true,
-    "showLiga": false
+    "showLiga": false,
+    "gridSize": 16
   }
 }
