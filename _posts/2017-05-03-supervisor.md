@@ -45,6 +45,11 @@ stderr_logfile = /root/repos/t2w/log/err.log
 files = /root/repos/t2w/supervisor.conf
 ```
 
+或将此配置文件链接到 `/etc/supervisor/conf.d` 中
+```shell
+ln -s /root/repos/t2w/supervisor.conf /etc/supervisor/conf.d/supervisor.t2w.conf
+```
+
 ## WebUI
 
 Supervisor 配置 `/etc/supervisor/supervisord.conf` 中:
