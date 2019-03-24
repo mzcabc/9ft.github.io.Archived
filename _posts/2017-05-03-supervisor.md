@@ -13,7 +13,6 @@ apt-get install supervisor
 
 # Configuration
 
-
 - `echo_supervisord_conf` 显示默认配置.
 - `echo_supervisord_conf > /etc/supervisor/supervisord.conf` 默认配置重定向到文件.
 - 建立要守护程序的配置文件 `supervisor.conf`:
